@@ -1,0 +1,61 @@
+# Configuration file of the Single Carrier Receiver
+# Lines that start with "#" are comments
+# Start with specifying the job name with keyword: job_name
+# Then, in the next line, add tasks using the keyword: add_new_tasks
+# After that the following three lines must have the attributes below
+# $task_name (string) $task_id (int) $task_predecessors (list)
+# $task_name (string) HEAD (TAIL), if the task is the head or tail of the task graph
+# $task_name (string) $earliest_start (int) $deadline (int)
+# The format: add_new_tasks $num_of_tasks (int)
+#             $task_name (string) $task_id (int) $task_predecessors (list)
+#             $task_name (string) HEAD (string)  
+#             $task_name (string) $earliest_start (int) $deadline (int)
+# Example: The following lines add a new task with ID=0, and
+#          there is no predecessor for this task
+#          (empty list means there is no dependency)
+#          This task is the head of the task graph
+#          earliest start time and deadline are 0 and 10, respectively
+#
+#          add_new_tasks 1
+#          scrambler 0 
+#          scrambler HEAD
+#          scrambler earliest_start 0 deadline 10
+#
+# After adding tasks, use keyword comm_vol to add communication volume for
+# the tasks that have dependencies 
+# The format: comm_vol $source_id (int) $destination_id (int) volume (int)
+# Example: The following line adds communication volume between task 0 (source)
+#          and task 1 (destination)
+#                    
+#          comm_vol 0 1 5
+
+job_name SC-R
+add_new_tasks 8
+match_correlation 0
+match_correlation HEAD
+match_correlation earliest_start 0 deadline 2 
+filter 1 0
+filter earliest_start 0 deadline 3
+payload_extraction 2 1
+payload_extraction earliest_start 0 deadline 4
+qpsk_demodulation 3 2
+qpsk_demodulation earliest_start 0 deadline 2 
+deinterleaver 4 3
+deinterleaver earliest_start 0 deadline 3
+viterbi_depuncturing 5 4
+viterbi_depuncturing earliest_start 0 deadline 3
+viterbi_decoder 6 5
+#viterbi_decoder TAIL
+viterbi_decoder earliest_start 0 deadline 3
+descrambler 7 6
+descrambler TAIL
+descrambler earliest_start 0 deadline 3
+
+
+comm_vol 0 1 0
+comm_vol 1 2 0
+comm_vol 2 3 0
+comm_vol 3 4 0
+comm_vol 4 5 0
+comm_vol 5 6 0
+comm_vol 6 7 0

@@ -1,0 +1,143 @@
+# Configuration file of the WiFi_Receiver
+# Lines that start with "#" are comments
+# Start with specifying the job name with keyword: job_name
+# Then, in the next line, add tasks using the keyword: add_new_tasks
+# After that the following three lines must have the attributes below
+# $task_name (string) $task_id (int) $task_predecessors (list)
+# $task_name (string) HEAD (TAIL), if the task is the head or tail of the task graph
+# $task_name (string) $earliest_start (int) $deadline (int)
+# The format: add_new_tasks $num_of_tasks (int)
+#             $task_name (string) $task_id (int) $task_predecessors (list)
+#             $task_name (string) HEAD (string)  
+#             $task_name (string) $earliest_start (int) $deadline (int)
+# Example: The following lines add a new task with ID=0, and
+#          there is no predecessor for this task
+#          (empty list means there is no dependency)
+#          This task is the head of the task graph
+#          earliest start time and deadline are 0 and 10, respectively
+#
+#          add_new_tasks 1
+#          scrambler 0 
+#          scrambler HEAD
+#          scrambler earliest_start 0 deadline 10
+#
+# After adding tasks, use keyword comm_vol to add communication volume for
+# the tasks that have dependencies 
+# The format: comm_vol $source_id (int) $destination_id (int) volume (int)
+# Example: The following line adds communication volume between task 0 (source)
+#          and task 1 (destination)
+#                    
+#          comm_vol 0 1 5
+
+job_name WiFi_Receiver
+add_new_tasks 34
+match_filter 0
+match_filter HEAD
+match_filter earliest_start 0 deadline 2 
+payload_extraction_1 1 0
+payload_extraction_1 earliest_start 0 deadline 3
+fft_1 2 1
+fft_1 earliest_start 0 deadline 4
+pilot_1 3 2
+pilot_1 earliest_start 0 deadline 2 
+qpsk_demodulation_1 4 3
+qpsk_demodulation_1 earliest_start 0 deadline 3
+deinterleaver_1 5 4
+deinterleaver_1 earliest_start 0 deadline 3
+format_conversion_1 6 5
+format_conversion_1 earliest_start 0 deadline 3
+payload_extraction_2 7 0
+payload_extraction_2 earliest_start 0 deadline 3
+fft_2 8 7
+fft_2 earliest_start 0 deadline 4
+pilot_2 9 8
+pilot_2 earliest_start 0 deadline 2 
+qpsk_demodulation_2 10 9
+qpsk_demodulation_2 earliest_start 0 deadline 3
+deinterleaver_2 11 10
+deinterleaver_2 earliest_start 0 deadline 3
+format_conversion_2 12 11
+format_conversion_2 earliest_start 0 deadline 3
+payload_extraction_3 13 0
+payload_extraction_3 earliest_start 0 deadline 3
+fft_3 14 13
+fft_3 earliest_start 0 deadline 4
+pilot_3 15 14
+pilot_3 earliest_start 0 deadline 2 
+qpsk_demodulation_3 16 15
+qpsk_demodulation_3 earliest_start 0 deadline 3
+deinterleaver_3 17 16
+deinterleaver_3 earliest_start 0 deadline 3
+format_conversion_3 18 17
+format_conversion_3 earliest_start 0 deadline 3
+payload_extraction_4 19 0
+payload_extraction_4 earliest_start 0 deadline 3
+fft_4 20 19
+fft_4 earliest_start 0 deadline 4
+pilot_4 21 20
+pilot_4 earliest_start 0 deadline 2 
+qpsk_demodulation_4 22 21
+qpsk_demodulation_4 earliest_start 0 deadline 3
+deinterleaver_4 23 22
+deinterleaver_4 earliest_start 0 deadline 3
+format_conversion_4 24 23
+format_conversion_4 earliest_start 0 deadline 3
+payload_extraction_5 25 0
+payload_extraction_5 earliest_start 0 deadline 3
+fft_5 26 25
+fft_5 earliest_start 0 deadline 4
+pilot_5 27 26
+pilot_5 earliest_start 0 deadline 2 
+qpsk_demodulation_5 28 27
+qpsk_demodulation_5 earliest_start 0 deadline 3
+deinterleaver_5 29 28
+deinterleaver_5 earliest_start 0 deadline 3
+format_conversion_5 30 29
+format_conversion_5 earliest_start 0 deadline 3
+viterbi_decoder 31 6 12 18 24 30
+viterbi_decoder earliest_start 0 deadline 3
+descrambler 32 31
+descrambler earliest_start 0 deadline 3
+message_decode 33 32
+message_decode TAIL
+message_decode earliest_start 0 deadline 3
+
+comm_vol 0 1 3000
+comm_vol 0 7 3000
+comm_vol 0 13 3000
+comm_vol 0 19 3000
+comm_vol 0 25 3000
+comm_vol 1 2 30
+comm_vol 2 3 80
+comm_vol 3 4 3000
+comm_vol 4 5 3000
+comm_vol 5 6 3000
+comm_vol 6 31 3000
+comm_vol 7 8 30
+comm_vol 8 9 80
+comm_vol 9 10 3000
+comm_vol 10 11 3000
+comm_vol 11 12 3000
+comm_vol 12 31 3000
+comm_vol 13 14 30
+comm_vol 14 15 80
+comm_vol 15 16 3000
+comm_vol 16 17 3000
+comm_vol 17 18 3000
+comm_vol 18 31 3000
+comm_vol 19 20 30
+comm_vol 20 21 80
+comm_vol 21 22 3000
+comm_vol 22 23 3000
+comm_vol 23 24 3000
+comm_vol 24 31 3000
+comm_vol 25 26 30
+comm_vol 26 27 80
+comm_vol 27 28 3000
+comm_vol 28 29 3000
+comm_vol 29 30 3000
+comm_vol 30 31 3000
+comm_vol 31 32 3000
+comm_vol 32 33 3000
+
+ 

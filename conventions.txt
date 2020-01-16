@@ -1,0 +1,42 @@
+This file keeps a list of common conventions used throughout DASH-Sim
+
+1- NAMING CONVENTIONS:
+
+- The class names are initial capitalized. When they contain two words,
+each one is initial capitalized
+
+Examples: Resource, ResourceManager
+
+- The object names are all lower case.
+When they contain more than one word, the words are separated by an underscore
+
+Examples: resource_matrix
+
+2- MESSAGES PRINTED BY DASH-SIM
+
+- DASH-Sim prints a variety of messages. An identifier at the beginning of
+the line describes the type of the message.
+
+    [D]: (D)ebugging messages. For example, messages printed during
+         parsing and elaboration related messages.
+    [I]: (I)nformation messages about the events that happen during the simulation
+    [E]: (E)rror messages
+
+3- PRIVATE VARIABLES
+
+From: https://docs.python.org/3/tutorial/classes.html
+
+“Private” instance variables that cannot be accessed except from inside an
+object don’t exist in Python. However, there is a convention that is followed
+by most Python code: a name prefixed with an underscore (e.g. _spam)
+should be treated as a non-public part of the API (whether it is a function,
+a method or a data member). It should be considered an implementation detail
+and subject to change without notice."
+
+DASH-Sim follows the same convention.
+
+4- IMPORTING PYTHON libraries and custom classes/functions
+
+Each files starts with importing classes/functions used therein.
+The convention is to import first built-in Python files.
+Then, the custom DASH-Sim files are imported after a blank line

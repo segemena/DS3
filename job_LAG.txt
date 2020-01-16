@@ -1,0 +1,27 @@
+job_name lag_detection
+add_new_tasks 7
+ST 0
+ST HEAD
+ST earliest_start 0 deadline 100000
+LFM 1 0
+LFM earliest_start 0 deadline 100000
+xcorr_fft0 2 1
+xcorr_fft0 earliest_start 0 deadline 100000
+xcorr_fft1 3 0
+xcorr_fft1 earliest_start 0 deadline 100000
+xcorr_vector_complex_conj_mul 4 3 2
+xcorr_vector_complex_conj_mul earliest_start 0 deadline 100000
+xcorr_ifft 5 4
+xcorr_ifft earliest_start 0 deadline 100000
+max_detect 6 5
+max_detect TAIL
+max_detect earliest_start 0 deadline 100000
+
+
+comm_vol 0 1 1
+comm_vol 1 2 1
+comm_vol 0 3 1
+comm_vol 3 4 150
+comm_vol 2 4 150
+comm_vol 4 5 1
+comm_vol 5 6 150
