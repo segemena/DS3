@@ -1,0 +1,5 @@
+<map id="scheduler.Scheduler.ETF_LB" name="scheduler.Scheduler.ETF_LB">
+<area shape="rect" id="node1" title="This scheduler compares the execution times of the current task for available resources and also cons..." alt="" coords="5,14,232,43"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a4d89e060febe70c6530778af408c2ca3" title="Compute the slowdown from running a given task with lower frequency." alt="" coords="280,5,529,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="577,5,783,52"/>
+</map>

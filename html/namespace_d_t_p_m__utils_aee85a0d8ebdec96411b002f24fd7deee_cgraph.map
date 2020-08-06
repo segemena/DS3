@@ -1,0 +1,5 @@
+<map id="DTPM_utils.find_oracle_group" name="DTPM_utils.find_oracle_group">
+<area shape="rect" id="node1" title="Return oracle decisions for a given group of snippets." alt="" coords="5,41,189,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a7932918de66e9976e37fc3adbe5355bb" title="Get the deadlines for all snippets." alt="" coords="237,5,427,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__utils.html#a7419d7582553e73f0709c51afd361270" title="Test whether the current sample satifies the RT constraints." alt="" coords="240,76,424,123"/>
+</map>

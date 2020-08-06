@@ -1,0 +1,9 @@
+<map id="DTPM_policies.ondemand_policy" name="DTPM_policies.ondemand_policy">
+<area shape="rect" id="node1" title="Default Linux&#39;s ondemand policy." alt="" coords="5,112,213,159"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a397e3796e3ba35a4e85ec8950a1cd1f4" title="Decrease the frequency by one step (based on the defined OPPs)." alt="" coords="261,5,511,52"/>
+<area shape="rect" id="node3" href="$namespace_d_a_s_h___sim__utils.html#a81bf122c328aabd024615f567c736e1b" title="Get the cluster utilization." alt="" coords="303,76,469,123"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#a61dbb4db911c289b4aa9f0a0b53d4bbf" title="Keep the same frequency for the current cluster." alt="" coords="277,147,495,193"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#a50fcd4b71d45df63ad2157b278805406" title="Set the maximum frequency for the current cluster." alt="" coords="284,217,488,264"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="559,181,764,228"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#a873a9de6e0fcfedd71d08f990d15b540" title="Get the maximum voltage of a cluster." alt="" coords="559,252,764,299"/>
+</map>

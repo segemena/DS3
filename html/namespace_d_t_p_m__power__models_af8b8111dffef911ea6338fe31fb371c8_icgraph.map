@@ -1,0 +1,5 @@
+<map id="DTPM_power_models.compute_static_power_dissipation" name="DTPM_power_models.compute_static_power_dissipation">
+<area shape="rect" id="node1" title="Compute the static power dissipation of the PE." alt="" coords="283,37,525,84"/>
+<area shape="rect" id="node2" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,5,235,52"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="13,77,227,106"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="DTPM_run_dagger.main" name="DTPM_run_dagger.main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,121,200,150"/>
+<area shape="rect" id="node2" href="$namespace_d_a_s_h___sim__utils.html#ab0c7ca7c432f038de9274dda42c02705" title="Remove old policy files." alt="" coords="285,8,467,55"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__generate__oracle.html#a3de27034c3b274f5e151bfd3f57f3e67" title="Based on the obtained oracle dictionary, update all datasets with the oracle decisions for each sampl..." alt="" coords="248,79,504,125"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__train__model.html#afd7bdffc54db8fec5941edf83350824f" title=" " alt="" coords="278,154,474,183"/>
+<area shape="rect" id="node8" href="$namespace_d_a_s_h___sim__v0.html#a635d4b6a4a16ab508897a2089ca4fa05" title="Parse the job and SoC configurations and execute the simulation environment with the parameters from ..." alt="" coords="263,490,489,519"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__utils.html#a65bf6bc0b22845b0e75422395ce132ac" title="Read the dataset and add the oracle decision for all samples." alt="" coords="575,5,762,52"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__utils.html#adde6dd5203b0df388d4dd9c86df8b3fa" title="Create dataset for leave&#45;one&#45;out experiments, completely remove one application from the dataset,..." alt="" coords="560,76,777,123"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__train__model.html#a7468f879062e4221b1dfa292f2d4e14e" title="Based on the chosen ML algorithm configured in config_file.ini, train the DTPM policy." alt="" coords="573,147,765,193"/>
+<area shape="rect" id="node9" href="$namespace_d_a_s_h___sim__utils.html#a46338263611a823e53ba1f06a234be9d" title="Remove old trace files." alt="" coords="578,217,759,264"/>
+<area shape="rect" id="node10" href="$namespace_d_t_p_m__utils.html#a869b37f609993178f3feeba27f1a28eb" title="Create a dictionary that stores the oracle configuration for for each group &lt;Workload,..." alt="" coords="552,288,785,335"/>
+<area shape="rect" id="node11" href="$namespace_d_t_p_m__utils.html#aaa6baa9535ed6c6f892e25bcb546486c" title="Update the global hardware counter variable with the trace for the hardware counters,..." alt="" coords="833,319,1044,365"/>
+<area shape="rect" id="node12" href="$namespace_d_t_p_m__utils.html#a7932918de66e9976e37fc3adbe5355bb" title="Get the deadlines for all snippets." alt="" coords="574,411,763,457"/>
+<area shape="rect" id="node13" href="$namespace_d_a_s_h___sim__utils.html#a6b74f54f3dc69b9355eb22e329dfa13e" title="Initialize config variables." alt="" coords="574,481,763,528"/>
+<area shape="rect" id="node14" href="$namespacejob__parser.html#a60f3a1b846c9b4a4c78e371c22c8eb24" title="Parse the specified job file." alt="" coords="583,553,754,582"/>
+<area shape="rect" id="node15" href="$namespaceils__scripts.html#a0900ccaa0e3d57fc501a5133f922f3e7" title="def ils_open_file_handles() :" alt="" coords="578,607,759,653"/>
+<area shape="rect" id="node16" href="$namespace_d_a_s_h___so_c__parser.html#a57cccf10cbc361fd50b050c1dc8dc820" title="Read and parse the SoC configuration." alt="" coords="555,677,782,724"/>
+<area shape="rect" id="node17" href="$namespacecommon.html#ae1a27e335a48783865ddc2be981c0f0a" title=" " alt="" coords="592,749,745,778"/>
+<area shape="rect" id="node18" href="$namespace_d_a_s_h___sim__utils.html#a85db1e40befdf4d527931923296ad388" title="Trace method for saving statistics related to the system, i.e., the whole simulation." alt="" coords="579,803,758,849"/>
+</map>

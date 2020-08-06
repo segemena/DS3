@@ -1,0 +1,6 @@
+This document is a guide for installing required software.
+
+Please find the required Python packages in the requirements.txt file. Other package versions may also be supported. 
+These packages can be installed using either Anaconda or Pip. 
+
+Python 3.6 is recommended.

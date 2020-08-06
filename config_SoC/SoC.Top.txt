@@ -1,0 +1,108 @@
+# Configuration file of the Resources available in DASH-SoC
+# Lines that start with "#" are comments
+
+# Add a new resource using the keyword: add_new_resource
+# Always add MEMORY last as a special resource, which will be used for communication 
+# and does not support any functionality
+# The following lines must have the attributes below
+# The format: add_new_resource $resource_type (string)  $resource_name (string) $resource_id (int) $capacity (int) $num_of_supported_functionality (int) $DVFS_mode (string)
+#             $functionality_name (string) $execution_time (float)
+# Note: for type, use the following abbreviations
+#       central processing unit --> CPU
+#       Arm LITTLE cluster      --> LTL
+#       Arm big cluster         --> BIG
+#       accelerator             --> ACC
+#       memory                  --> MEM
+#
+# opp $frequency (int - MHz) $voltage (int - mV), defines the Operating Performance Points (OPPs) with frequency and voltage tuples
+#
+# trip_freq $trip_1 $trip_2 $trip_3 ..., defines the frequencies that are set at each trip point if throttling is enabled. "-1" means that the frequency is not modified
+#
+# power_profile $frequency $power_1 $power_2 $power_3 ... $power_max_capacity
+# e.g., power_profile 1000 0.19 0.29 0.35 0.40. At 1GHz, the power for 1 core is 0.19W, 2 cores is 0.29W, and so on.
+#
+# PG_profile $frequency $power_1 $power_2 $power_3 ... $power_max_capacity
+#
+# Example: The following lines add a new CPU with name=P1, ID=0, capacity=1 and
+#          that can run 3 different tasks using "performance" DVFS mode
+#
+#          add_new_resource resource_type CPU resource_name P1 resource_ID 0 capacity 1 num_supported_functionalities 3 DVFS_mode performance
+#          opp 1000 1150
+#          trip_freq -1 -1 -1
+#          power_profile 1000 0.1
+#          PG_profile 1000 0.1
+#          scrambler 12
+#          reed_solomon_encoder 15
+#          bpsk_modulation 18
+#
+# After adding resources, use keyword comm_band to add communication bandwidth 
+# between resources
+# The format: comm_band $source_id (int) $destination_id (int) bandwidth (int)
+# Example: The following line adds communication bandwidth between resource 0 (source)
+#          and resource 1 (destination)
+#                    
+#          comm_band 0 1 5
+
+
+add_new_resource resource_type CPU1 resource_name P1 resource_ID 0 capacity 1 num_supported_functionalities 10 DVFS_mode performance
+opp 1000 900
+trip_freq -1 -1 -1
+power_profile 1000 0.05885
+PG_profile 1000 0.05885
+task_1 14
+task_2 13
+task_3 11
+task_4 13
+task_5 12
+task_6 13
+task_7 7
+task_8 5
+task_9 18
+task_10 21
+
+add_new_resource resoruce_type CPU2 resource_name P2 resource_ID 1 capacity 1 num_supported_functionalities 10 DVFS_mode performance
+opp 1000 900
+trip_freq -1 -1 -1
+power_profile 1000 0.05885
+PG_profile 1000 0.05885
+task_1 16
+task_2 19
+task_3 13
+task_4 8
+task_5 13
+task_6 16
+task_7 15
+task_8 11
+task_9 12
+task_10 7
+
+add_new_resource resource_type CPU3 resource_name P3 resource_ID 2 capacity 1 num_supported_functionalities 10 DVFS_mode performance
+opp 1000 900
+trip_freq -1 -1 -1
+power_profile 1000 0.05885
+PG_profile 1000 0.05885
+task_1 9
+task_2 18
+task_3 19
+task_4 17
+task_5 10
+task_6 9
+task_7 11
+task_8 14
+task_9 20
+task_10 16
+
+add_new_resource resource_type MEM resource_name M1 resource_ID 3 capacity 1 num_supported_functionalities 1 DVFS_mode none
+None 0 
+
+comm_band_self 10000
+
+comm_band 0 0 100
+comm_band 1 1 100
+comm_band 2 2 100
+comm_band 3 3 0
+comm_band 0 3 2
+comm_band 1 3 2
+comm_band 2 3 2
+
+

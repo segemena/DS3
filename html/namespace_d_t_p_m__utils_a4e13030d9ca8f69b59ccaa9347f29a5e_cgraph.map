@@ -1,0 +1,13 @@
+<map id="DTPM_utils.get_power_list_prediction" name="DTPM_utils.get_power_list_prediction">
+<area shape="rect" id="node1" title="Predict the power for all clusters based on the inputs." alt="" coords="5,173,187,220"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="235,103,477,149"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="536,41,741,88"/>
+<area shape="rect" id="node8" href="$namespace_d_t_p_m__power__models.html#a745d2c5771fd1b2bda1ef599bdc2b362" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="235,173,477,220"/>
+<area shape="rect" id="node9" href="$namespace_d_t_p_m__power__models.html#af8b8111dffef911ea6338fe31fb371c8" title="Compute the static power dissipation of the PE." alt="" coords="235,244,477,291"/>
+<area shape="rect" id="node10" href="$namespace_d_t_p_m__power__models.html#aa395bf114a31df88ad5f3e7513b8a08e" title="Get the power consumption of the current PE." alt="" coords="251,315,461,361"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a72eb1a0883aa9da4fab60acadd6b13dd" title="Convert frequency from MHz to Hz." alt="" coords="536,112,741,159"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#a9842c48a1a666626749170428c3ac8eb" title="Convert voltage from mV to V." alt="" coords="536,183,741,229"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="800,5,1005,52"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="800,76,1005,123"/>
+<area shape="rect" id="node11" href="$namespace_d_a_s_h___sim__utils.html#a99aab56376ce5ff66032d442e5a09b46" title="Get the number of tasks that are being executed." alt="" coords="525,315,752,361"/>
+</map>

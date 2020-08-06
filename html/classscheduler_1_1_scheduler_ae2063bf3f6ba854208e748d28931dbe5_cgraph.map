@@ -1,0 +1,5 @@
+<map id="scheduler.Scheduler.PEFT_RT" name="scheduler.Scheduler.PEFT_RT">
+<area shape="rect" id="node1" title="Schedule with the PEFT_RT heuristic." alt="" coords="5,32,243,61"/>
+<area shape="rect" id="node2" href="$namespacedag__merge.html#ad9a6b3a62fb4bbbe789bd30d77fc966f" title=" " alt="" coords="291,5,487,35"/>
+<area shape="rect" id="node3" href="$namespacepeft.html#a31a67dceaf8bedd93da39986f89ebd9a" title="Given an application DAG and a set of matrices specifying PE bandwidth and (task, pe) execution times..." alt="" coords="313,59,464,88"/>
+</map>

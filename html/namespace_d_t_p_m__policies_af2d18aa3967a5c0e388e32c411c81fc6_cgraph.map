@@ -1,0 +1,13 @@
+<map id="DTPM_policies.imitation_learning_policy" name="DTPM_policies.imitation_learning_policy">
+<area shape="rect" id="node1" title="HiLITE IL policy (https://ieeexplore.ieee.org/document/9085952)" alt="" coords="5,183,199,229"/>
+<area shape="rect" id="node2" href="$namespace_d_a_s_h___sim__utils.html#a12301b830278c9ed9494270c6557afd3" title="Get the current system state." alt="" coords="285,5,451,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#af9a1bf09d01c4c70fd45f0ae6a7eaf79" title="Increase the frequency of all PEs by one step (based on the respective defined OPPs)." alt="" coords="247,76,489,123"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#a14d88f3a20ec782ca5f12ca5bd1ef8fb" title="Increase the number of active cores by one (based on the respective cluster capacities)." alt="" coords="247,147,489,193"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#afb7e529058dd98d91b864921cf43539a" title="Set a given number of cores to the current cluster." alt="" coords="266,217,470,264"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#a94089a6a0f58f9fe8f950adb500f8028" title="Set a given frequency to the respective clusters." alt="" coords="266,288,470,335"/>
+<area shape="rect" id="node11" href="$namespace_d_a_s_h___sim__utils.html#a9d4cfc2811b7a083f250dc2ae2584dd4" title="Trace method for saving the DTPM IL predictions." alt="" coords="279,359,457,405"/>
+<area shape="rect" id="node3" href="$namespace_d_a_s_h___sim__utils.html#a81bf122c328aabd024615f567c736e1b" title="Get the cluster utilization." alt="" coords="557,5,723,52"/>
+<area shape="rect" id="node8" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="537,288,743,335"/>
+<area shape="rect" id="node9" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="791,252,996,299"/>
+<area shape="rect" id="node10" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="791,323,996,369"/>
+</map>

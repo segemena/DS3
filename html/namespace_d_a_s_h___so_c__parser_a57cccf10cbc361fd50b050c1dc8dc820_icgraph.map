@@ -1,0 +1,4 @@
+<map id="DASH_SoC_parser.resource_parse" name="DASH_SoC_parser.resource_parse">
+<area shape="rect" id="node1" title="Read and parse the SoC configuration." alt="" coords="280,5,507,52"/>
+<area shape="rect" id="node2" href="$namespace_d_a_s_h___sim__v0.html#a635d4b6a4a16ab508897a2089ca4fa05" title="Parse the job and SoC configurations and execute the simulation environment with the parameters from ..." alt="" coords="5,14,232,43"/>
+</map>

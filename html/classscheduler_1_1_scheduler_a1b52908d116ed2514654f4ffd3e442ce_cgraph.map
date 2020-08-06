@@ -1,0 +1,5 @@
+<map id="scheduler.Scheduler.HEFT_RT" name="scheduler.Scheduler.HEFT_RT">
+<area shape="rect" id="node1" title="Schedule with the HEFT_RT heuristic." alt="" coords="5,32,243,61"/>
+<area shape="rect" id="node2" href="$namespacedag__merge.html#ad9a6b3a62fb4bbbe789bd30d77fc966f" title=" " alt="" coords="291,5,487,35"/>
+<area shape="rect" id="node3" href="$namespaceheft.html#adff2de444daf22653cbcf0dba5bc7c9e" title="Given an application DAG and a set of matrices specifying PE bandwidth and (task, pe) execution times..." alt="" coords="314,59,463,88"/>
+</map>

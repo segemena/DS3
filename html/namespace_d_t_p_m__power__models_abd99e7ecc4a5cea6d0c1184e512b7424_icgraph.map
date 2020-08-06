@@ -1,0 +1,11 @@
+<map id="DTPM_power_models.get_voltage_constant_mode" name="DTPM_power_models.get_voltage_constant_mode">
+<area shape="rect" id="node1" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="1171,76,1376,123"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="880,5,1123,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__policies.html#a3f92bcd9808660d5c7a0b9d14a7fbea5" title="Initialize the frequency for the given cluster." alt="" coords="906,76,1097,123"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#a94089a6a0f58f9fe8f950adb500f8028" title="Set a given frequency to the respective clusters." alt="" coords="899,147,1103,193"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="604,18,819,47"/>
+<area shape="rect" id="node5" href="$class_d_a_s_h___sim__core_1_1_simulation_manager.html#ad15c74dffe0798248f9e95e6a485ec99" title="Implement the basic run method that will be called periodically in each simulation &quot;tick&quot;." alt="" coords="601,76,822,123"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#adbbdb88f910d369ef2d1a3022c540bf0" title="Apply throttling if the temperature exceeds the trip points." alt="" coords="591,147,832,193"/>
+<area shape="rect" id="node8" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,155,543,185"/>
+<area shape="rect" id="node9" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,147,235,193"/>
+</map>

@@ -1,0 +1,70 @@
+# Configuration file of the Tasks
+# Lines that start with "#" are comments
+# Start adding task using the keyword: add_new_tasks
+# The the following three lines must have the attributes below
+# $task_name (string) $task_id (int) $task_predecessors (list)
+# $task_name (string) HEAD (TAIL), if the task is the head or tail of the task graph
+# $task_name (string) $earliest_start (int) $deadline (int)
+# The format: add_new_tasks $num_of_tasks (int)
+#             $task_name (string) $task_id (int) $task_predecessors (list)
+#             $task_name (string) HEAD (string)  
+#             $task_name (string) $earliest_start (int) $deadline (int)
+# Example: The following lines add a new task with ID=0, and
+#          predecessor for this task is task with ID=2
+#          (empty list means there is no dependency)
+#          This task is the head of the task graph
+#          earliest start time and deadline are 0 and 10, respectively
+#
+#          add_new_tasks 1
+#          scrambler 0 2
+#          scrambler HEAD
+#          scrambler earliest_start 0 deadline 10
+#
+# After adding tasks, use keyword comm_vol to add communication volume for
+# the tasks that have dependencies 
+# The format: comm_vol $source_id (int) $destination_id (int) volume (int)
+# Example: The following line adds communication volume between task 0 (source)
+#          and task 1 (destination)
+#                    
+#          comm_vol 0 1 5
+
+job_name Top
+add_new_tasks 10
+task_1 0
+task_1 HEAD
+task_1 earliest_start 0 deadline 2 input_vol 0 output_vol 0
+task_2 1 0
+task_2 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_3 2 0
+task_3 earliest_start 0 deadline 4 input_vol 0 output_vol 0
+task_4 3 0
+task_4 earliest_start 0 deadline 2 input_vol 0 output_vol 0
+task_5 4 0
+task_5 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_6 5 0
+task_6 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_7 6 2
+task_7 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_8 7 1 3 5
+task_8 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_9 8 1 3 4
+task_9 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+task_10 9 6 7 8
+task_10 TAIL
+task_10 earliest_start 0 deadline 3 input_vol 0 output_vol 0
+
+comm_vol 0 1 18
+comm_vol 0 2 12
+comm_vol 0 3 9
+comm_vol 0 4 11
+comm_vol 0 5 14
+comm_vol 1 7 19
+comm_vol 1 8 16
+comm_vol 2 6 23
+comm_vol 3 7 27
+comm_vol 3 8 23
+comm_vol 4 8 13
+comm_vol 5 7 15
+comm_vol 6 9 17
+comm_vol 7 9 11
+comm_vol 8 9 13

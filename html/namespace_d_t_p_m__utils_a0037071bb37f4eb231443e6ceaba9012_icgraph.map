@@ -1,0 +1,6 @@
+<map id="DTPM_utils.sed_inplace" name="DTPM_utils.sed_inplace">
+<area shape="rect" id="node1" title="Perform the pure&#45;Python equivalent of in&#45;place sed substitution: e.g., ‘sed &#45;i &#45;e &#39;s/’${pattern}&#39;/&#39;${..." alt="" coords="824,14,1016,43"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a7a7c5a77471e4cf2477cc0a8df97b8d0" title="Update datasets with current temperature profiles." alt="" coords="528,5,776,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__utils.html#a767b2af47d4348383131e98dd6726ea0" title="Create the dataset used for the IL DTPM policies." alt="" coords="268,5,480,52"/>
+<area shape="rect" id="node4" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="5,14,220,43"/>
+</map>

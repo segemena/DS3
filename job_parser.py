@@ -1,20 +1,24 @@
-'''
-Description: This file contains the code to parse Tasks given in config_file.ini file.
+'''!
+@brief This file contains the code to parse jobs given in config_file.ini file.
 '''
 import sys
 import platform
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import math
 
 import common                                                                    # The common parameters used in DASH-Sim are defined in common_parameters.py
 
 def job_parse(jobs, file_name):
+    '''!
+    Parse the specified job file.
+    @param jobs: List that stores all new jobs that are parsed
+    @param file_name: Name of the job file to be parsed
     '''
-	 In case of running platform is windows,opening and reading a file 
-    requires encoding = 'utf-8'
-    In mac no need to specify encoding techique
-    '''
+    # In case of running platform is windows,opening and reading a file
+    # requires encoding = 'utf-8'
+    # In mac no need to specify encoding techique
     try:
         current_platform = platform.system()                                    # Find the platform
         if 'windows' in current_platform.lower():
@@ -29,7 +33,7 @@ def job_parse(jobs, file_name):
         print("[E] Please check if the file 'config_file.ini' has the correct file name")
         sys.exit()
 
-    found_new_task = False;                                                     # The input lines do not correspond to a particular task
+    found_new_task = False                                                      # The input lines do not correspond to a particular task
                                                                                 # unless found_new_task = = true;
     num_tasks_read = 0                                                          # Initially none of the task are read from the file
     num_of_total_tasks = 0                                                      # Initially there is no information about the number tasks
@@ -88,10 +92,12 @@ def job_parse(jobs, file_name):
                 new_job.task_list[ind].tail = True                              # change 'tail' to be True
                 continue
             
-            if current_line[1] == 'earliest_start':                             # if 'earliest_start' in current line
-                ind = new_job.task_list.index(new_job.task_list[-1])            # then take the id of the last added task and
-                new_job.task_list[ind].est = current_line[2]                    # add earliest start time (est), and
-                new_job.task_list[ind].deadline = current_line[4]               # deadline for the task
+            if current_line[1] == 'earliest_start':                                                                      # if 'earliest_start' in current line
+                ind = new_job.task_list.index(new_job.task_list[-1])                                                     # then take the id of the last added task and
+                new_job.task_list[ind].est = current_line[2]                                                             # add earliest start time (est), and
+                new_job.task_list[ind].deadline = current_line[4]                                                        # deadline for the task
+                new_job.task_list[ind].input_packet_size = math.ceil(int(current_line[6])/float(common.packet_size))     # input data packet size, and
+                new_job.task_list[ind].output_packet_size = math.ceil(int(current_line[8])/float(common.packet_size))    # output data packet size
                 
                 if (num_tasks_read == num_of_total_tasks):
                     found_new_task = False                                      # Reset these variables, since we completed reading the current resource
@@ -109,6 +115,9 @@ def job_parse(jobs, file_name):
                 #print("The ID of this task: ", current_line[1])
                 new_task.ID = int(current_line[1])
 
+                #print("The base ID of this task: ", current_line[1])
+                new_task.base_ID = int(current_line[1])
+
                 #print('This task belongs to application %s' %(new_job.name))
                 new_task.jobname = new_job.name
                 
@@ -118,15 +127,39 @@ def job_parse(jobs, file_name):
                 for i in range(len(current_line)-offset):
                     new_task.predecessors.append(int(current_line[i+offset]))
 
+                #DAG depth logic
+                if new_task.ID == 0 :
+                    new_job.dag_depth = dict()
+                    new_job.dag_depth[new_task.ID] = 0
+                    new_job.dag_depth['DAG']       = -1
+                    #print('Task ID: ' + str(new_task.ID) + ' Depth: ' + str(dag_depth[new_task.ID])) 
+                else :
+                    max_pred = -1
+                    for pred in new_task.predecessors :
+                        # print(new_job.dag_depth)
+                        if new_job.dag_depth[pred] > max_pred :
+                            max_pred = new_job.dag_depth[pred]
+                    new_job.dag_depth[new_task.ID] = max_pred + 1
+                    #print('Task ID: ' + str(new_task.ID) + ' Depth: ' + str(dag_depth[new_task.ID])) 
+                
+                if new_job.dag_depth['DAG'] < new_job.dag_depth[new_task.ID] :
+                    new_job.dag_depth['DAG'] = new_job.dag_depth[new_task.ID]
+
                 num_tasks_read += 1                                             # Increment the number functionalities read so far
                 #print("number of tasks read: ", num_tasks_read)
                 #task_list.list.append(new_task)
                 new_job.task_list.append(new_task)
                 
         # end of else: # if not(found_new_task)
+   
+    ## Compute the depth of each task in DAG
+    for task in new_job.task_list :
+        task.dag_depth = new_job.dag_depth['DAG'] - new_job.dag_depth[task.ID]
+
     
     
     if (common.simulation_mode == 'validation'):
+        plt.figure()
         # show the directed acyclic task graph
         dag = nx.DiGraph(new_job.comm_vol)
         dag.remove_edges_from(

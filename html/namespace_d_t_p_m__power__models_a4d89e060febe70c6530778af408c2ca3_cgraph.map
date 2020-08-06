@@ -1,0 +1,4 @@
+<map id="DTPM_power_models.compute_DVFS_performance_slowdown" name="DTPM_power_models.compute_DVFS_performance_slowdown">
+<area shape="rect" id="node1" title="Compute the slowdown from running a given task with lower frequency." alt="" coords="5,5,255,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="303,5,508,52"/>
+</map>

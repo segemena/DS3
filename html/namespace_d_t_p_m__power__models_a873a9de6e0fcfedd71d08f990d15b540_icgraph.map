@@ -1,0 +1,10 @@
+<map id="DTPM_power_models.get_max_voltage" name="DTPM_power_models.get_max_voltage">
+<area shape="rect" id="node1" title="Get the maximum voltage of a cluster." alt="" coords="1112,95,1317,142"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__policies.html#a3f92bcd9808660d5c7a0b9d14a7fbea5" title="Initialize the frequency for the given cluster." alt="" coords="867,59,1057,106"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#a50fcd4b71d45df63ad2157b278805406" title="Set the maximum frequency for the current cluster." alt="" coords="860,130,1064,177"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="594,5,809,35"/>
+<area shape="rect" id="node4" href="$class_d_a_s_h___sim__core_1_1_simulation_manager.html#ad15c74dffe0798248f9e95e6a485ec99" title="Implement the basic run method that will be called periodically in each simulation &quot;tick&quot;." alt="" coords="591,59,812,106"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__policies.html#ad8acdadeaddbfce8f8b3f09e8e3eba00" title="Default Linux&#39;s ondemand policy." alt="" coords="597,130,805,177"/>
+<area shape="rect" id="node7" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,139,543,168"/>
+<area shape="rect" id="node8" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,130,235,177"/>
+</map>

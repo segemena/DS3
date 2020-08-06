@@ -1,0 +1,8 @@
+<map id="DTPM_policies.initialize_frequency" name="DTPM_policies.initialize_frequency">
+<area shape="rect" id="node1" title="Initialize the frequency for the given cluster." alt="" coords="5,106,196,153"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="497,56,703,102"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a873a9de6e0fcfedd71d08f990d15b540" title="Get the maximum voltage of a cluster." alt="" coords="244,36,449,82"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="497,157,703,204"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#aa13ff06bd0c93b4d1526f2e828159774" title="Get the minimum voltage of a cluster." alt="" coords="244,177,449,224"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="244,106,449,153"/>
+</map>

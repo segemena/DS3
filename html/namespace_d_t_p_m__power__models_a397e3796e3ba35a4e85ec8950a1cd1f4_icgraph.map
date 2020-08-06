@@ -1,0 +1,6 @@
+<map id="DTPM_power_models.decrease_frequency" name="DTPM_power_models.decrease_frequency">
+<area shape="rect" id="node1" title="Decrease the frequency by one step (based on the defined OPPs)." alt="" coords="847,5,1096,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__policies.html#ad8acdadeaddbfce8f8b3f09e8e3eba00" title="Default Linux&#39;s ondemand policy." alt="" coords="591,5,799,52"/>
+<area shape="rect" id="node3" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,14,543,43"/>
+<area shape="rect" id="node4" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,5,235,52"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="DTPM_power_models.set_frequency" name="DTPM_power_models.set_frequency">
+<area shape="rect" id="node1" title="Set a given frequency to the respective clusters." alt="" coords="5,41,209,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="257,41,463,88"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="511,5,716,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="511,76,716,123"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="DTPM_power_models.get_frequency_in_Hz" name="DTPM_power_models.get_frequency_in_Hz">
+<area shape="rect" id="node1" title="Convert frequency from MHz to Hz." alt="" coords="559,41,764,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="268,5,511,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#a745d2c5771fd1b2bda1ef599bdc2b362" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="268,76,511,123"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="5,50,220,79"/>
+</map>

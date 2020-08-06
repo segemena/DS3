@@ -1,0 +1,5 @@
+<map id="DTPM_policies.initialize_frequency" name="DTPM_policies.initialize_frequency">
+<area shape="rect" id="node1" title="Initialize the frequency for the given cluster." alt="" coords="275,29,465,75"/>
+<area shape="rect" id="node2" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="9,5,223,35"/>
+<area shape="rect" id="node3" href="$class_d_a_s_h___sim__core_1_1_simulation_manager.html#ad15c74dffe0798248f9e95e6a485ec99" title="Implement the basic run method that will be called periodically in each simulation &quot;tick&quot;." alt="" coords="5,59,227,106"/>
+</map>

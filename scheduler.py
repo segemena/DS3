@@ -1,6 +1,8 @@
-'''
-Descrption: This file contains the code for scheduler class 
-which contains different types of scheduler. 
+'''!
+@brief This file contains all schedulers in DASH-Sim
+
+Scheduler class is defined in this file which contains different types of scheduler as a member function.
+Developers can add thier own algorithms here and implement in DASH-Sim by add a function caller in DASH_Sim_core.py
 '''
 import networkx as nx
 import numpy as np
@@ -9,15 +11,19 @@ import copy
 import common                                                                   # The common parameters used in DASH-Sim are defined in common_parameters.py
 import DTPM_power_models
 
+import pickle
+
 class Scheduler:
+    '''!
+    The Scheduler class constains all schedulers implemented in DASH-Sim
+    '''
     def __init__(self, env, resource_matrix, name, PE_list, jobs):
-        '''
-        env: Pointer to the current simulation environment
-        resource_matrix: The data structure that defines power/performance
-    		  characteristics of the PEs for each supported task
-        name : The name of the requested scheduler
-        PE_list: The PEs available in the current SoCs
-        jobs: The list of all jobs given to DASH-Sim
+        '''!
+        @param env: Pointer to the current simulation environment
+        @param resource_matrix: The data structure that defines power/performance characteristics of the PEs for each supported task
+        @param name : The name of the requested scheduler
+        @param PE_list: The PEs available in the current SoCs
+        @param jobs: The list of all jobs given to DASH-Sim
         '''
         self.env = env
         self.resource_matrix = resource_matrix
@@ -35,10 +41,10 @@ class Scheduler:
 
     # Specific scheduler instances can be defined below
     def CPU_only(self, list_of_ready):
-        '''
-        This scheduler always select the resource with ID 0 (CPU) to
-        execute all outstanding tasks without any comparison between
+        '''!
+        This scheduler always select the resource with ID 0 (CPU) to execute all outstanding tasks without any comparison between
         available resources
+        @param list_of_ready: The list of ready tasks
         '''
         for task in list_of_ready:
             task.PE_ID = 0
@@ -46,114 +52,11 @@ class Scheduler:
     # end def CPU_only(list_of_ready):
 
 
-    def ILP_ONE(self, list_of_ready):
-        '''
-        This scheduler utilizes a look-up table for scheduling tasks
-        to a particular processor
-        '''
-        for task in list_of_ready:
-            for i, schedule in enumerate(common.table):
-                if (task.base_ID == i):
-                    task.PE_ID = int(schedule[0])
-                    task.order = schedule[1]
-# =============================================================================
-#                     if (not self.PEs[int(schedule[0])].idle):
-#                         for PE in self.PEs:
-#                             if ((PE.type == self.PEs[int(schedule[0])].type) and (PE.idle) and
-#                                 (task.name in self.resource_matrix.list[PE.ID].supported_functionalities)):
-#                                 #print(PE.type ,self.PEs[int(schedule[0])].type )
-#                                 task.PE_ID = PE.ID
-# =============================================================================
-
-        list_of_ready.sort(key=lambda x: x.order, reverse=False)
-    # def ILP_5RX_FPGA(self, list_of_ready):
-
-    def ILP_TWO(self, list_of_ready):
-        '''
-        This scheduler utilizes a look-up table for scheduling tasks
-        to a particular processor
-        '''
-        for task in list_of_ready:
-            if ('Receiver' in task.jobname):
-                for i, schedule in enumerate(common.table):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-            else:
-                for i, schedule in enumerate(common.table_2):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-
-
-        list_of_ready.sort(key=lambda x: x.order, reverse=False)
-    # def ILP_5X_FPGA(self, list_of_ready):
-
-    def ILP(self, list_of_ready):
-        '''
-        This scheduler utilizes a look-up table for scheduling tasks
-        to a particular processor
-        '''
-        for task in list_of_ready:
-            for i, schedule in enumerate(common.table):
-                if (task.base_ID == i):
-                    task.PE_ID = int(schedule[0])
-                    task.order = schedule[1]
-
-        list_of_ready.sort(key=lambda x: x.order, reverse=False)
-    # def ILP(self, list_of_ready):
-
-
-    def ILP_TX(self, list_of_ready):
-        '''
-        This scheduler utilizes a look-up table for scheduling tasks
-        to a particular processor
-        '''
-        for task in list_of_ready:
-            for i, schedule in enumerate(common.table):
-                if (task.base_ID == i):
-                    task.PE_ID = schedule[0]
-                    task.order = schedule[1]
-
-        list_of_ready.sort(key=lambda x: x.order, reverse=False)
-
-    # def ILP_TX(self, list_of_ready):
-
-    def ILP_FOUR(self, list_of_ready):
-        '''
-        This scheduler utilizes a look-up table for scheduling tasks
-        to a particular processor
-        '''
-        for task in list_of_ready:
-            if ('lag' in task.jobname):
-                for i, schedule in enumerate(common.table):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-            elif ('pulse' in task.jobname):
-                for i, schedule in enumerate(common.table_2):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-            elif ('Receiver' in task.jobname):
-                for i, schedule in enumerate(common.table_3):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-            else:
-                for i, schedule in enumerate(common.table_4):
-                    if (task.base_ID == i):
-                        task.PE_ID = int(schedule[0])
-                        task.order = schedule[1]
-
-        list_of_ready.sort(key=lambda x: x.order, reverse=False)
-    # def ILP_FOUR(self, list_of_ready):
-
     def MET(self, list_of_ready):
-        '''
-        This scheduler compares the execution times of the current
-        task for available resources and returns the ID of the resource
+        '''!
+        This scheduler compares the execution times of the current task for available resources and returns the ID of the resource
         with minimum execution time for the current task.
+        @param list_of_ready: The list of ready tasks
         '''
         # Initialize a list to record number of assigned tasks to a PE
         # for every scheduling instance
@@ -229,7 +132,7 @@ class Scheduler:
             assigned[task.PE_ID] += 1
 
             if (task.PE_ID == -1):
-                print ('[E] Time %s: %s can not be assigned to any resource, please check DASH.SoC.**.txt file'
+                print ('[E] Time %s: %s can not be assigned to any resource, please check SoC.**.txt file'
                        % (self.env.now,task.name))
                 print ('[E] or job_**.txt file')
                 assert(task.PE_ID >= 0)
@@ -246,11 +149,10 @@ class Scheduler:
     # end of MET(list_of_ready)
 
     def EFT(self, list_of_ready):
-        '''
-        This scheduler compares the execution times of the current
-        task for available resources and also considers if a resource has
-        already a task running. it picks the resource which will give the
-        earliest finish time for the task
+        '''!
+        This scheduler compares the execution times of the current task for available resources and also considers if a resource has
+        already a task running. it picks the resource which will give the earliest finish time for the task
+        @param list_of_ready: The list of ready tasks
         '''
 
         for task in list_of_ready:
@@ -353,7 +255,7 @@ class Scheduler:
             task.PE_ID = comparison.index(min(comparison))
 
             if task.PE_ID == -1:
-                print ('[E] Time %s: %s can not be assigned to any resource, please check DASH.SoC.**.txt file'
+                print ('[E] Time %s: %s can not be assigned to any resource, please check SoC.**.txt file'
                        % (self.env.now,task.ID))
                 print ('[E] or job_**.txt file')
                 assert(task.PE_ID >= 0)
@@ -377,11 +279,11 @@ class Scheduler:
     #end of EFT(list_of_ready)
 
     def STF(self, list_of_ready):
-        '''
-        This scheduler compares the execution times of the current
-        task for available resources and returns the ID of the resource
-        with minimum execution time for the current task. The only difference
-        between STF and MET is the order in which the tasks are scheduled onto resources
+        '''!
+        This scheduler compares the execution times of the current task for available resources and returns the ID of the resource
+        with minimum execution time for the current task. The only difference between STF and MET is the order in which the tasks 
+        are scheduled onto resources
+        @param list_of_ready: The list of ready tasks
         '''
 
         ready_list = copy.deepcopy(list_of_ready)
@@ -429,7 +331,7 @@ class Scheduler:
                        %(self.env.now, shortest_task.ID, shortest_task.PE_ID, shortest_task_exec_time))
 
             if list_of_ready[index].PE_ID == -1:
-                print ('[E] Time %s: %s can not be assigned to any resource, please check DASH.SoC.**.txt file'
+                print ('[E] Time %s: %s can not be assigned to any resource, please check SoC.**.txt file'
                        % (self.env.now,shortest_task.name))
                 print ('[E] or job_**.txt file')
                 assert(shortest_task.PE_ID >= 0)
@@ -454,12 +356,11 @@ class Scheduler:
     # end of STF(list_of_ready)
 
     def ETF_LB(self, list_of_ready):
-        '''
-        This scheduler compares the execution times of the current
-        task for available resources and also considers if a resource has
-        already a task running. it picks the resource which will give the
-        earliest finish time for the task. Additionally, the task with the
-        lowest earliest finish time  is scheduled first
+        '''!
+        This scheduler compares the execution times of the current task for available resources and also considers if a resource has
+        already a task running. it picks the resource which will give the earliest finish time for the task. Additionally, the task 
+        with the lowest earliest finish time is scheduled first
+        @param list_of_ready: The list of ready tasks
         '''
 
         ready_list = copy.deepcopy(list_of_ready)
@@ -606,7 +507,7 @@ class Scheduler:
             shortest_task.PE_ID = shortest_task_pe_id
 
             if shortest_task.PE_ID == -1:
-                print('[E] Time %s: %s can not be assigned to any resource, please check DASH.SoC.**.txt file'
+                print('[E] Time %s: %s can not be assigned to any resource, please check SoC.**.txt file'
                       % (self.env.now, shortest_task.ID))
                 print('[E] or job_**.txt file')
                 assert (task.PE_ID >= 0)
@@ -636,7 +537,7 @@ class Scheduler:
 
         # end of while len(ready_list) > 0 :
 
-    # end of ETF( list_of_ready)
+    # end of ETF_LB( list_of_ready)
 
     def ETF(self, list_of_ready):
         '''
@@ -806,5 +707,43 @@ class Scheduler:
             # that can run next_task
 
         # end of while len(ready_list) > 0 :
-    #end of ETF( list_of_ready)
+    #end of ETF( list_of_ready) 
+    
+  
+    
+    def CP(self, list_of_ready):
+        '''!
+        This scheduler utilizes a look-up table for scheduling tasks to a particular processor
+        @param list_of_ready: The list of ready tasks
+        '''
+        for task in list_of_ready:    
+            ind = 0
+            base =  0
+            for item in common.ilp_job_list:
+                if item[0] == task.jobID:
+                    ind = common.ilp_job_list.index(item)
+                    break
+            
+            previous_job_list = list(range(ind))
+            for job in previous_job_list:
+                selection = common.ilp_job_list[job][1]
+                num_of_tasks = len(self.jobs.list[selection].task_list)
+                base += num_of_tasks
+            
+            #print(task.jobID, base, task.base_ID)
+            
+            for i, schedule in enumerate(common.table):
+            
+                if len(common.table) > base:
+                    if (task.base_ID + base) == i:
+                        task.PE_ID = schedule[0]
+                        task.order = schedule[1]
+                else:
+                    if ( task.ID%num_of_tasks == i):
+                        task.PE_ID = schedule[0]
+                        task.order = schedule[1]        
+         
+            
+        list_of_ready.sort(key=lambda x: x.order, reverse=False) 
+    # def CP_(self, list_of_ready): 
     

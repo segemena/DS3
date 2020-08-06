@@ -1,0 +1,4 @@
+<map id="DTPM_utils.oracle_test_RT_and_thermal" name="DTPM_utils.oracle_test_RT_and_thermal">
+<area shape="rect" id="node1" title="Test whether the current sample satifies the RT constraints." alt="" coords="237,5,421,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#aee85a0d8ebdec96411b002f24fd7deee" title="Return oracle decisions for a given group of snippets." alt="" coords="5,5,189,52"/>
+</map>

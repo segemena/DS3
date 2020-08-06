@@ -1,0 +1,6 @@
+<map id="DTPM_utils.run_parallel_sims" name="DTPM_utils.run_parallel_sims">
+<area shape="rect" id="node1" title="Run all possible combinations for the provided frequency points in parallel." alt="" coords="5,50,235,79"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a859d1e4c979be2758bbf67f936961ea0" title="Merge the hardware counters from multiple applications to create the snippet profile." alt="" coords="283,5,528,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__utils.html#ac1dcbad85c5db3c717aba9fbb47d9156" title="Return a list (2d numpy array) of all length k sequences of non&#45;negative integers n1,..." alt="" coords="313,76,498,123"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__utils.html#a09a93a8e21f05873ab9bf11a3fa78e9a" title="Based on the Odroid&#45;XU3 hardware counter profiles, filter and merge the hardware counters for individ..." alt="" coords="576,5,803,52"/>
+</map>

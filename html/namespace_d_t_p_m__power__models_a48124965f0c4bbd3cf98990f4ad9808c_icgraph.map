@@ -1,0 +1,16 @@
+<map id="DTPM_power_models.get_max_freq" name="DTPM_power_models.get_max_freq">
+<area shape="rect" id="node1" title="Get the maximum frequency of a cluster." alt="" coords="1468,251,1673,298"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a4d89e060febe70c6530778af408c2ca3" title="Compute the slowdown from running a given task with lower frequency." alt="" coords="1171,49,1420,95"/>
+<area shape="rect" id="node5" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,321,543,351"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="1193,185,1398,231"/>
+<area shape="rect" id="node9" href="$namespace_d_t_p_m__policies.html#a3f92bcd9808660d5c7a0b9d14a7fbea5" title="Initialize the frequency for the given cluster." alt="" coords="906,251,1097,298"/>
+<area shape="rect" id="node13" href="$namespace_d_t_p_m__power__models.html#a50fcd4b71d45df63ad2157b278805406" title="Set the maximum frequency for the current cluster." alt="" coords="1193,374,1397,421"/>
+<area shape="rect" id="node3" href="$classscheduler_1_1_scheduler.html#a34f633449b5d2de2f22dfa46a863844e" title="This scheduler compares the execution times of the current task for available resources and also cons..." alt="" coords="888,5,1115,35"/>
+<area shape="rect" id="node4" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="604,189,819,219"/>
+<area shape="rect" id="node6" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,313,235,359"/>
+<area shape="rect" id="node8" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="880,181,1123,227"/>
+<area shape="rect" id="node11" href="$namespace_d_t_p_m__power__models.html#a94089a6a0f58f9fe8f950adb500f8028" title="Set a given frequency to the respective clusters." alt="" coords="899,110,1103,157"/>
+<area shape="rect" id="node10" href="$class_d_a_s_h___sim__core_1_1_simulation_manager.html#ad15c74dffe0798248f9e95e6a485ec99" title="Implement the basic run method that will be called periodically in each simulation &quot;tick&quot;." alt="" coords="601,251,822,298"/>
+<area shape="rect" id="node12" href="$namespace_d_t_p_m__power__models.html#adbbdb88f910d369ef2d1a3022c540bf0" title="Apply throttling if the temperature exceeds the trip points." alt="" coords="591,114,832,161"/>
+<area shape="rect" id="node14" href="$namespace_d_t_p_m__policies.html#ad8acdadeaddbfce8f8b3f09e8e3eba00" title="Default Linux&#39;s ondemand policy." alt="" coords="607,374,815,421"/>
+</map>

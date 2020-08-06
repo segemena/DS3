@@ -1,0 +1,6 @@
+<map id="peft.schedule_dag" name="peft.schedule_dag">
+<area shape="rect" id="node1" title="Given an application DAG and a set of matrices specifying PE bandwidth and (task, pe) execution times..." alt="" coords="297,59,448,88"/>
+<area shape="rect" id="node2" href="$classscheduler_1_1_scheduler.html#ae2063bf3f6ba854208e748d28931dbe5" title="Schedule with the PEFT_RT heuristic." alt="" coords="9,5,246,35"/>
+<area shape="rect" id="node3" href="$classjob__generator_1_1_job_generator.html#a05c89b53502f2fbaecc8b4be2cd8b330" title=" " alt="" coords="5,59,249,88"/>
+<area shape="rect" id="node4" href="$namespacetest__peft.html#a59f563d71f5372b40c5ba3f6f804b6f8" title=" " alt="" coords="34,113,221,159"/>
+</map>

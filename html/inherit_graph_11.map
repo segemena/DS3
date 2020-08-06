@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,59,68,88"/>
+<area shape="rect" id="node2" href="$classdag__merge_1_1_merge_method.html" title="The MergeMethod class is an Enum that can be used to select which merge method to use to merge DAGs t..." alt="" coords="116,5,320,35"/>
+<area shape="rect" id="node3" href="$classheft_1_1_op_mode.html" title="The OpMode class is an Enum that can be used to select which method should be used to perform process..." alt="" coords="162,59,274,88"/>
+<area shape="rect" id="node4" href="$classheft_1_1_rank_metric.html" title="The RankMetric class is an Enum that can be used to select which rank metric we should use to priorit..." alt="" coords="153,112,283,141"/>
+</map>

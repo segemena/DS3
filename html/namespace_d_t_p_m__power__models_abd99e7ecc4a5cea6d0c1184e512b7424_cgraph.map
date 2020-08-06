@@ -1,0 +1,5 @@
+<map id="DTPM_power_models.get_voltage_constant_mode" name="DTPM_power_models.get_voltage_constant_mode">
+<area shape="rect" id="node1" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="5,41,211,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="259,5,464,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="259,76,464,123"/>
+</map>

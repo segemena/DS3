@@ -1,0 +1,8 @@
+<map id="DASH_Sim_utils.get_num_tasks_being_executed" name="DASH_Sim_utils.get_num_tasks_being_executed">
+<area shape="rect" id="node1" title="Get the number of tasks that are being executed." alt="" coords="857,81,1084,128"/>
+<area shape="rect" id="node2" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,5,235,52"/>
+<area shape="rect" id="node3" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,39,543,69"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#aa395bf114a31df88ad5f3e7513b8a08e" title="Get the power consumption of the current PE." alt="" coords="595,144,805,191"/>
+<area shape="rect" id="node5" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="305,183,520,213"/>
+<area shape="rect" id="node6" href="$namespace_d_a_s_h___sim__utils.html#a6e735399e7ec2fbaff105e2e61f577ca" title="Trace method for saving the load variations." alt="" coords="591,90,809,119"/>
+</map>

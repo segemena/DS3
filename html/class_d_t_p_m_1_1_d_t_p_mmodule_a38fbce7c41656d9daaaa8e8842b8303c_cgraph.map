@@ -1,0 +1,21 @@
+<map id="DTPM.DTPMmodule.evaluate_PE" name="DTPM.DTPMmodule.evaluate_PE">
+<area shape="rect" id="node1" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="5,394,265,423"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#adbbdb88f910d369ef2d1a3022c540bf0" title="Apply throttling if the temperature exceeds the trip points." alt="" coords="313,112,555,158"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="1153,173,1359,220"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="1153,77,1359,124"/>
+<area shape="rect" id="node7" href="$namespace_d_a_s_h___sim__utils.html#a99aab56376ce5ff66032d442e5a09b46" title="Get the number of tasks that are being executed." alt="" coords="614,517,841,564"/>
+<area shape="rect" id="node8" href="$namespace_d_t_p_m__policies.html#ad8acdadeaddbfce8f8b3f09e8e3eba00" title="Default Linux&#39;s ondemand policy." alt="" coords="330,260,538,306"/>
+<area shape="rect" id="node14" href="$namespace_d_t_p_m__power__models.html#a7a8c48822db8400738a6ca192d153c14" title="Predict the temperature based on the current status of the clusters." alt="" coords="319,385,549,432"/>
+<area shape="rect" id="node15" href="$namespace_d_a_s_h___sim__utils.html#a9e8abb5c67640fd11fdd9d5c21a502b6" title="Trace method for saving the frequency variations." alt="" coords="345,456,523,502"/>
+<area shape="rect" id="node16" href="$namespace_d_a_s_h___sim__utils.html#a6e735399e7ec2fbaff105e2e61f577ca" title="Trace method for saving the load variations." alt="" coords="325,331,543,360"/>
+<area shape="rect" id="node17" href="$namespace_d_a_s_h___sim__utils.html#adb2f79d806721cd45b8c1aed4195aac2" title="Trace method for saving statistics related to the PEs." alt="" coords="325,578,543,607"/>
+<area shape="rect" id="node18" href="$namespace_d_a_s_h___sim__utils.html#a3bbe277af776d06ca9c0e0119c644864" title="Trace method for saving the temperature variations." alt="" coords="345,632,523,678"/>
+<area shape="rect" id="node19" href="$namespace_d_a_s_h___sim__utils.html#a7cc21649251636a91c121ae8ba6d1d28" title="Update the PE utilization." alt="" coords="337,702,531,749"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a94089a6a0f58f9fe8f950adb500f8028" title="Set a given frequency to the respective clusters." alt="" coords="625,112,829,158"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="900,112,1105,158"/>
+<area shape="rect" id="node9" href="$namespace_d_t_p_m__power__models.html#a397e3796e3ba35a4e85ec8950a1cd1f4" title="Decrease the frequency by one step (based on the defined OPPs)." alt="" coords="603,234,852,281"/>
+<area shape="rect" id="node10" href="$namespace_d_a_s_h___sim__utils.html#a81bf122c328aabd024615f567c736e1b" title="Get the cluster utilization." alt="" coords="644,305,811,352"/>
+<area shape="rect" id="node11" href="$namespace_d_t_p_m__power__models.html#a61dbb4db911c289b4aa9f0a0b53d4bbf" title="Keep the same frequency for the current cluster." alt="" coords="618,376,837,422"/>
+<area shape="rect" id="node12" href="$namespace_d_t_p_m__power__models.html#a50fcd4b71d45df63ad2157b278805406" title="Set the maximum frequency for the current cluster." alt="" coords="625,446,829,493"/>
+<area shape="rect" id="node13" href="$namespace_d_t_p_m__power__models.html#a873a9de6e0fcfedd71d08f990d15b540" title="Get the maximum voltage of a cluster." alt="" coords="900,385,1105,432"/>
+</map>

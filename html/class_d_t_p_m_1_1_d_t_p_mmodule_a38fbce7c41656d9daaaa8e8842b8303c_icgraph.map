@@ -1,0 +1,4 @@
+<map id="DTPM.DTPMmodule.evaluate_PE" name="DTPM.DTPMmodule.evaluate_PE">
+<area shape="rect" id="node1" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,14,543,43"/>
+<area shape="rect" id="node2" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,5,235,52"/>
+</map>

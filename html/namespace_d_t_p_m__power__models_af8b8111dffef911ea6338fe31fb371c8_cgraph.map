@@ -1,0 +1,4 @@
+<map id="DTPM_power_models.compute_static_power_dissipation" name="DTPM_power_models.compute_static_power_dissipation">
+<area shape="rect" id="node1" title="Compute the static power dissipation of the PE." alt="" coords="5,5,248,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a9842c48a1a666626749170428c3ac8eb" title="Convert voltage from mV to V." alt="" coords="296,5,501,52"/>
+</map>

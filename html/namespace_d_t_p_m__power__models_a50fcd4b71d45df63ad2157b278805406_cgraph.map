@@ -1,0 +1,5 @@
+<map id="DTPM_power_models.set_max_frequency" name="DTPM_power_models.set_max_frequency">
+<area shape="rect" id="node1" title="Set the maximum frequency for the current cluster." alt="" coords="5,41,209,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="257,5,463,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a873a9de6e0fcfedd71d08f990d15b540" title="Get the maximum voltage of a cluster." alt="" coords="257,76,463,123"/>
+</map>

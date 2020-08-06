@@ -1,0 +1,6 @@
+<map id="DTPM_utils.merge_hardware_counters_multiple_applications" name="DTPM_utils.merge_hardware_counters_multiple_applications">
+<area shape="rect" id="node1" title="Merge the hardware counters from multiple applications to create the snippet profile." alt="" coords="788,5,1033,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a3c794b8a9df741fee23a0173d1767bb0" title="Run all possible combinations for the provided frequency points in parallel." alt="" coords="511,14,740,43"/>
+<area shape="rect" id="node3" href="$namespacegenerate__traces.html#aba243fb6487915af57184a96c1239e4f" title=" " alt="" coords="288,14,463,43"/>
+<area shape="rect" id="node4" href="$namespacerun___d_t_p_m__framework.html#aa6adb610b795b45e39ecf6c91c9af820" title=" " alt="" coords="5,5,240,52"/>
+</map>

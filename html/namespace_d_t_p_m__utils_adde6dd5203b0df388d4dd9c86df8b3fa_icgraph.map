@@ -1,0 +1,6 @@
+<map id="DTPM_utils.create_reduced_dataset" name="DTPM_utils.create_reduced_dataset">
+<area shape="rect" id="node1" title="Create dataset for leave&#45;one&#45;out experiments, completely remove one application from the dataset,..." alt="" coords="835,5,1052,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__generate__oracle.html#a3de27034c3b274f5e151bfd3f57f3e67" title="Based on the obtained oracle dictionary, update all datasets with the oracle decisions for each sampl..." alt="" coords="531,5,787,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__run__dagger.html#a41090d26491cb1e16d5b628213b12d6d" title=" " alt="" coords="288,14,483,43"/>
+<area shape="rect" id="node4" href="$namespacerun___d_t_p_m__framework.html#aa6adb610b795b45e39ecf6c91c9af820" title=" " alt="" coords="5,5,240,52"/>
+</map>

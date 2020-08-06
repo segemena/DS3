@@ -1,56 +1,55 @@
-'''
-Description: This file is the main() function which should be run to get the stimulation results.
+'''!
+@brief This file is the main() function which should be run to get the simulation results.
 '''
 import simpy
 import configparser
-import argparse
 import matplotlib.pyplot as plt                                                 
 import random                                                                  
 import numpy as np
 import sys
 import os
-import pandas as pd
 import networkx as nx
-from shutil import copyfile
 import pickle
 import csv
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=UserWarning)
 
 
 import job_generator                                                            # Dynamic job generation is handled by job_generator.py
 import common                                                                   # The common parameters used in DASH-Sim are defined in common.py
-import DASH_SoC_parser                                                          # The resource parameters used in DASH-Sim are obtained from
-                                                                                # Resource initialization file(DASH.SoC.**.txt), parsed by DASH_SoC_parser.py
-import job_parser                                                               # The parameters in a job used in DASH-Sim are obtained from
-                                                                                # Job initialization file (job_**.txt), parsed by job_parser.py
+import DASH_SoC_parser                                                          # The resource parameters used in DASH-Sim are obtained from resource initialization file(SoC.**.txt), parsed by DASH_SoC_parser.py
+import job_parser                                                               # The parameters in a job used in DASH-Sim are obtained from Job initialization file (job_**.txt), parsed by job_parser.py
 import processing_element                                                       # Define the processing element class
 import DASH_Sim_core                                                            # The core of the simulation engine (SimulationManager) is defined DASH_Sim_core.py
 import scheduler                                                                # The DASH-Sim uses the scheduler defined in scheduler.py
 import DASH_Sim_utils
-import DTPM_utils
 
-def run_simulator():
-    readme_file = open("readme.txt", "r", encoding = "utf-8").read()                # The following lines are to create a readme/help file
-    parser = argparse.ArgumentParser(
-            formatter_class=argparse.RawDescriptionHelpFormatter,description=readme_file)
-    args = parser.parse_args()                                                      # when user want to run the simulation on the command line
-                                                                                    # type in command line python DASH_Sim_v0 -h
+def run_simulator(scale_values=common.scale_values_list):
+    '''!
+    Parse the job and SoC configurations and execute the simulation environment with the parameters from config_file.ini
+    @param scale_values: Optional input to select specific scale values. Default value is defined in the config_file.ini
+    '''
+
+    #common.clear_screen()                                                           # Clear IPthon Console screen at the beginning of each simulation
+    print('%59s'%('**** Welcome to DASH_Sim.v0 ****'))
+    print('%65s'%('**** \xa9 2020 eLab ASU ALL RIGHTS RESERVED ****'))
+
+    # Instantiate the ResourceManager object that contains all the resources
+    # in the target DSSoC
+    resource_matrix = common.ResourceManager()                                      # This line generates an empty resource matrixesource_matrix = common.ResourceManager()                                      # This line generates an empty resource matrix
+    config = configparser.ConfigParser()
+    config.read('config_file.ini')
+    resource_file = "config_SoC/" + config['DEFAULT']['resource_file']
+    DASH_SoC_parser.resource_parse(resource_matrix, resource_file)                  # Parse the input configuration file to populate the resource matrix
+    
+    common.scheduler = config['DEFAULT']['scheduler']                               # Assign scheduler name variable
+    config_scale_values = config['SIMULATION MODE']['scale_values']
+    common.scale_values_list = common.str_to_list(config_scale_values)
 
     plt.close('all')                                                                # close all existing plots before the new simulation
     if (common.CLEAN_TRACES):
         DASH_Sim_utils.clean_traces()
-
-    #common.clear_screen()                                                           # Clear IPthon Console screen at the beginning of each simulation
-    print('%59s'%('**** Welcome to DASH_Sim.v0 ****'))
-    print('%65s'%('**** \xa9 2018 eLab ASU ALL RIGHTS RESERVED ****'))
-
-
-    # Instantiate the ResourceManager object that contains all the resources
-    # in the target DSSoC
-    resource_matrix = common.ResourceManager()                                      # This line generates an empty resource matrix
-    config = configparser.ConfigParser()
-    config.read('config_file.ini')
-    resource_file = config['DEFAULT']['resource_file']
-    DASH_SoC_parser.resource_parse(resource_matrix, resource_file)    # Parse the input configuration file to populate the resource matrix
 
     for cluster in common.ClusterManager.cluster_list:
         if cluster.DVFS != 'none':
@@ -68,67 +67,23 @@ def run_simulator():
     # Instantiate the ApplicationManager object that contains all the jobs
     # in the target DSSoC
     jobs = common.ApplicationManager()                                              # This line generates an empty list for all jobs
-    job_files_list = common.str_to_list(config['DEFAULT']['task_file'])
+    job_files_list = ["config_Jobs/" + f for f in common.str_to_list(config['DEFAULT']['job_file'])]
     for job_file in job_files_list:
         job_parser.job_parse(jobs, job_file)                                        # Parse the input job file to populate the job list
 
-    # Initialize config variables
-    common.snippet_start_time = common.warmup_period
-    common.snippet_ID_inj = -1
-    common.snippet_ID_exec = 0
-    common.snippet_throttle = -1
-    common.snippet_temp_list = []
-    common.current_temperature_vector = [common.T_ambient,  # Indicate the current PE temperature for each hotspot
-                                         common.T_ambient,
-                                         common.T_ambient,
-                                         common.T_ambient,
-                                         common.T_ambient]
-    common.B_model = []
-    common.job_counter_list = [0]*len(common.current_job_list)
-    common.throttling_state = -1
-    if len(common.job_list) > 0:
-        common.max_num_jobs = int(config['SIMULATION MODE']['jobs']) * len(common.job_list)
+    ## Initialize variables at simulation start
+    DASH_Sim_utils.init_variables_at_sim_start()
+
+    if common.job_list == []:
+        if len(common.job_probabilities) != len(job_files_list):
+            print("[E] The length of the application list (job_file) must match the job_probabilities configuration.")
+            print("[E] Please check these parameters in the config_file.ini")
+            sys.exit()
     else:
-        common.max_num_jobs = int(config['SIMULATION MODE']['jobs'])
-
-    scheduler_name = config['DEFAULT']['scheduler']                       # Assign the requested scheduler name to a variable
-
-    dataset = pd.read_csv('ILP_data.csv')
-    if (scheduler_name == 'ILP'):
-        common.table = list(zip(dataset.iloc[:, 0], dataset.iloc[:, 1]))
-    elif (scheduler_name == 'ILP_2'):
-        common.table = list(zip(dataset.iloc[:, 2], dataset.iloc[:, 3]))
-    elif (scheduler_name == 'ILP_3'):
-        common.table = list(zip(dataset.iloc[:, 4], dataset.iloc[:, 5]))
-    elif (scheduler_name == 'ILP_TX'):
-        common.table = list(zip(dataset.iloc[:, 6], dataset.iloc[:, 7]))
-    elif (scheduler_name == 'ILP_5TX_FPGA'):
-        common.table = list(zip(dataset.iloc[:, 12], dataset.iloc[:, 13]))
-    elif (scheduler_name == 'ILP_5RX_FPGA'):
-        common.table = list(zip(dataset.iloc[:, 14], dataset.iloc[:, 15]))
-    elif (scheduler_name == 'ILP_5X_FPGA'):
-        common.table = list(zip(dataset.iloc[:, 14], dataset.iloc[:, 15]))
-        common.table_2 = list(zip(dataset.iloc[:, 12], dataset.iloc[:, 13]))
-    elif (scheduler_name == 'ILP_5TX_BAL'):
-        common.table = list(zip(dataset.iloc[:, 20], dataset.iloc[:, 21]))
-    elif (scheduler_name == 'ILP_5RX_BAL'):
-        common.table = list(zip(dataset.iloc[:, 22], dataset.iloc[:, 23]))
-    elif (scheduler_name == 'ILP_5X_BAL'):
-        common.table = list(zip(dataset.iloc[:, 22], dataset.iloc[:, 23]))
-        common.table_2 = list(zip(dataset.iloc[:, 20], dataset.iloc[:, 21]))
-    elif (scheduler_name == 'ILP_5TX_BIG'):
-        common.table = list(zip(dataset.iloc[:, 28], dataset.iloc[:, 29]))
-    elif (scheduler_name == 'ILP_5RX_BIG'):
-        common.table = list(zip(dataset.iloc[:, 30], dataset.iloc[:, 31]))
-    elif (scheduler_name == 'ILP_5X_BIG'):
-        common.table = list(zip(dataset.iloc[:, 30], dataset.iloc[:, 31]))
-        common.table_2 = list(zip(dataset.iloc[:, 28], dataset.iloc[:, 29]))
-    elif (scheduler_name == 'ILP_MULTI'):
-        common.table = list(zip(dataset.iloc[:,32],dataset.iloc[:,33]))
-        common.table_2 = list(zip(dataset.iloc[:,34],dataset.iloc[:,35]))
-        common.table_3 = list(zip(dataset.iloc[:,22],dataset.iloc[:,23]))
-        common.table_4 =  list(zip(dataset.iloc[:,20],dataset.iloc[:,21]))
-
+        if len(common.job_list[0]) != len(job_files_list):
+            print("[E] The length of the application list (job_file) must match each snippet in the job_list configuration.")
+            print("[E] Please check these parameters in the config_file.ini")
+            sys.exit()
 
     # Check whether the resource_matrix and task list are initialized correctly
     if (common.DEBUG_CONFIG):
@@ -147,7 +102,7 @@ def run_simulator():
             for ii in range(curr_resource.num_of_functionalities):
                 print ('%4s'%('')+curr_resource.supported_functionalities[ii],
                        curr_resource.performance[ii])
-        print('\nCommunication Bandwidth matrix between Resources is\n', resource_matrix.comm_band)
+        print('\nCommunication Bandwidth matrix between Resources is\n', common.ResourceManager.comm_band)
             # end for ii
         # end for i
 
@@ -166,7 +121,7 @@ def run_simulator():
         # end for ii
 
         print('[D] Read the scheduler name')
-        print('Scheduler name: %s' % scheduler_name)
+        print('Scheduler name: %s' % common.scheduler)
         print('')
     # end if (DEBUG)
 
@@ -175,8 +130,12 @@ def run_simulator():
         '''
         Start the simulation in VALIDATION MODE
         '''
+        job_execution_time = 0                                                  # Average execution time
+        
         # Provide the value of the seed for the random variables
         random.seed(common.seed)  # user can regenerate the same results by assigning a value to $random_seed in configuration file
+        np.random.seed(common.seed)
+        common.iteration = 1 # set the iteration value
 
         # Instantiate the PerfStatics object that contains all the performance statics
         common.results = common.PerfStatics()
@@ -196,7 +155,7 @@ def run_simulator():
         # end for
 
         # Construct the scheduler
-        DASH_scheduler = scheduler.Scheduler(env, resource_matrix, scheduler_name,
+        DASH_scheduler = scheduler.Scheduler(env, resource_matrix, common.scheduler,
                                              DASH_resources, jobs)
 
         # Check whether PEs are initialized correctly
@@ -216,6 +175,9 @@ def run_simulator():
 
         env.run(until = common.simulation_length)
 
+        
+        job_execution_time += common.results.cumulative_exe_time / common.results.completed_jobs                           # find the mean job duration
+
         print('[I] Completed Simulation ...')
         for job in common.Validation.generated_jobs:
             if job in common.Validation.completed_jobs:
@@ -228,12 +190,14 @@ def run_simulator():
         print("-"*55)
         print("%-30s : %-20s"%("SoC config file",resource_file))
         print("%-30s : %-20s"%("Job config files",' '.join(job_files_list)))
-        print("%-30s : %-20s"%("Scheduler",scheduler_name))
+        print("%-30s : %-20s"%("Scheduler",common.scheduler))
         print("%-30s : %-20s"%("Clock period(us)",common.simulation_clk))
         print("%-30s : %-20d"%("Simulation length(us)",common.simulation_length))
         print('\nSimulation Statitics')
         print("-"*55)
         print("%-30s : %-20s" % ("Execution time(us)", round(common.results.execution_time, 2)))
+        print("%-30s : %-20s" % ("Cumulative Execution time(us)", round(common.results.cumulative_exe_time, 2)))
+        print("%-30s : %-20s"%("Avg execution time(us)",job_execution_time))
         print("%-30s : %-20s" % ("Total energy consumption(uJ)",
                                  round(common.results.energy_consumption, 2)))
         print("%-30s : %-20s" % ("EDP",
@@ -271,12 +235,14 @@ def run_simulator():
             plt.ylabel('Processing Element', fontsize=18)
             plt.xlabel('Time', fontsize=18)
             plt.tick_params(labelsize=16)
-            # plt.title('DASH-Sim - %s' %(scheduler_name), fontsize =18)
+            # plt.title('DASH-Sim - %s' %(common.scheduler), fontsize =18)
             plt.setp(labelsy, fontsize=18)
             ax.set_ylim(bottom=-0.1, top=ilen * 0.5 + 0.5)
             ax.set_xlim(left=-5)
             ax.grid(color='g', linestyle=':', alpha=0.5)
             plt.show()
+            
+        
     # end of if (common.simulation_mode == 'validation'):
 
     if (common.simulation_mode == 'performance'):
@@ -284,11 +250,17 @@ def run_simulator():
         Start the simulation in PERFORMANCE MODE
         '''
         ave_job_injection_rate = [0]*len(common.scale_values_list)                  # The list contains the mean of the lambda injection value corresponding each lambda value 
-                                                                                    # based on the number of jobs put into ready queue list
+                                                                                    # Based on the number of jobs put into ready queue list
         ave_job_execution_time = [0]*len(common.scale_values_list)                  # The list contains the mean job duration for each lambda value
         ave_job_completion_rate = [0]*len(common.scale_values_list)                 # The list contains the mean job completion rate for each lambda value
         lamd_values_list = [0]*len(common.scale_values_list)                        # The list of lambda values which will determine the job arrival rate
-
+        ave_concurrent_jobs = [0]*len(common.scale_values_list)                     # Average number of jobs in the system for a workload with a specific scale value
+        ave_active_time  = [0]*len(common.scale_values_list)                        # The list of average active times of PEs for a workload with a specific scale
+        ave_blocking_time = [0]*len(common.scale_values_list)                       # The list of blocking times of PEs for a workload with a specific scale
+        ave_energy = [0]*len(common.scale_values_list)                              # The list contains the average energy consumption for each lambda (scale) value
+        ave_EDP = [0]*len(common.scale_values_list)                                 # The list contains the average EDP for each lambda value
+        
+        
         for (ind,scale) in enumerate(common.scale_values_list):
             common.scale = scale  # Assign each value in $scale_values_list to common.scale
             lamd_values_list[ind] = 1 / scale
@@ -300,10 +272,22 @@ def run_simulator():
             job_execution_time  = 0.0
             job_injection_rate  = 0.0
             job_completion_rate = 0.0
+            concurrent_jobs     = 0.0
+            active_time         = [0]*len(resource_matrix.list)
+            blocking_time       = [0]*len(resource_matrix.list)
+            energy              = 0.0
+            EDP                 = 0.0
 
             for iteration in range(common.num_of_iterations):                       # Repeat the simulation for a given number of numbers for each lambda value
+                
+                ## Initialize variables at simulation start
+                DASH_Sim_utils.init_variables_at_sim_start()
+
+                ## Set a global iteration variable
+                common.iteration = iteration
+
                 random.seed(iteration)                                              # user can regenerate the same results by assigning a value to $random_seed in configuration file
-                #np.random.seed(iteration)
+                np.random.seed(iteration)
 
                 # Instantiate the PerfStatics object that contains all the performance statics
                 common.results = common.PerfStatics()
@@ -324,7 +308,7 @@ def run_simulator():
                 # end for
 
                 # Construct the scheduler
-                DASH_scheduler = scheduler.Scheduler(env, resource_matrix, scheduler_name,
+                DASH_scheduler = scheduler.Scheduler(env, resource_matrix, common.scheduler,
                                                      DASH_resources, jobs)
 
                 if (common.INFO_JOB):
@@ -335,7 +319,7 @@ def run_simulator():
                 sim_core = DASH_Sim_core.SimulationManager(env, sim_done, job_gen, DASH_scheduler, DASH_resources,
                                                            jobs, resource_matrix)
 
-                if common.sim_early_stop is False:
+                if common.inject_fixed_num_jobs is False:
                     env.run(until = common.simulation_length)
                 else:
                     env.run(until = sim_done)
@@ -357,85 +341,56 @@ def run_simulator():
                                                  round(common.results.cumulative_energy_consumption, 6)))
                     print("[I] %-30s : %-20s" % ("EDP",
                                                  round((common.results.execution_time - common.warmup_period) * common.results.cumulative_energy_consumption, 2)))
-                    print("[I] %-30s : %-20s" % ("Cumulative EDP",
-                                                 round(common.results.cumulative_exe_time * common.results.cumulative_energy_consumption, 2)))
+                    print("[I] %-30s : %-20s" % ("Average concurrent jobs", round(common.results.average_job_number, 2)))
+                    
                     result_exec_time = common.results.execution_time - common.warmup_period
                     result_energy_cons = common.results.cumulative_energy_consumption
                     result_EDP = result_exec_time * result_energy_cons
                     header_list = ['Execution time(us)', 'Total energy consumption(J)', 'EDP']
                     result_list = [result_exec_time, result_energy_cons, result_EDP]
                     DASH_Sim_utils.trace_system()
-                    if not common.generate_complete_trace:
-                        if not os.path.exists(common.RESULTS):
-                            with open(common.RESULTS, 'w', newline='') as csvfile:
-                                result_file = csv.writer(csvfile, delimiter=',')
-                                result_file.writerow(header_list)
-                        with open(common.RESULTS, 'a', newline='') as csvfile:
+                    if not os.path.exists(common.RESULTS):
+                        with open(common.RESULTS, 'w', newline='') as csvfile:
                             result_file = csv.writer(csvfile, delimiter=',')
-                            result_file.writerow(result_list)
+                            result_file.writerow(header_list)
+                    with open(common.RESULTS, 'a', newline='') as csvfile:
+                        result_file = csv.writer(csvfile, delimiter=',')
+                        result_file.writerow(result_list)
 
                 try:
                     job_execution_time += common.results.cumulative_exe_time / common.results.completed_jobs                    # find the mean job duration value for this iteration
                 except ZeroDivisionError:
                     job_execution_time += 0
-                job_injection_rate += common.results.injected_jobs / (common.simulation_length - common.warmup_period)      # find the average injection rate
-                job_completion_rate += common.results.completed_jobs / (common.simulation_length - common.warmup_period)    # find the average injection rate
+
+                # Add the results obtained for this iteration into a list
+                job_injection_rate += common.results.injected_jobs / (common.results.execution_time - common.warmup_period)      
+                job_completion_rate += common.results.completed_jobs / (common.results.execution_time - common.warmup_period)    
+                concurrent_jobs += common.results.average_job_number
+                for i, resource in enumerate(DASH_resources):
+                    active_time[i] += resource.active/common.results.execution_time
+                    blocking_time[i] += resource.blocking/common.results.execution_time
+                energy += common.results.cumulative_energy_consumption
+                EDP += (common.results.execution_time - common.warmup_period) * common.results.cumulative_energy_consumption
             # end of for iteration in range(common.num_of_iterations):
 
+            # Calculate average values of the results from all iterations
             ave_job_execution_time[ind] = job_execution_time / common.num_of_iterations
             ave_job_injection_rate[ind] = job_injection_rate / common.num_of_iterations
             ave_job_completion_rate[ind] = job_completion_rate / common.num_of_iterations
+            ave_concurrent_jobs[ind] = concurrent_jobs / common.num_of_iterations
+            ave_active_time[ind] = [x / common.num_of_iterations for x in active_time]
+            ave_blocking_time[ind] = [x / common.num_of_iterations for x in blocking_time]
+            ave_energy[ind] = energy / common.num_of_iterations
+            ave_EDP[ind] = EDP / common.num_of_iterations
+            
 
             if (common.INFO_JOB):
                 print('[I] Completed all %d iterations for scale = %d,'
                       %(common.num_of_iterations,scale), end='')
                 print(' injection rate:%f, completion rate:%f, ave_execution_time:%f'
                       % (ave_job_injection_rate[ind], ave_job_completion_rate[ind], ave_job_execution_time[ind]))
+
         # end of for (ind,scale) in enumerate(common.scale_values_list):
 
-
-
-        # Plot or save important results when needed
-    # =============================================================================
-    #     c = 'y'
-    #     plt.figure(1)
-    #     plt.plot(common.results.sampling_rate_list,common.results.job_counter_list, marker='x', color=c)
-    #     plt.xlabel('time')
-    #     plt.ylabel('')
-    #     plt.grid(True)
-    #     plt.show()
-    #
-    #     plt.figure(2)
-    #     plt.plot(ave_job_injection_rate, ave_job_execution_time, marker='s', color=c)
-    #     plt.xlabel('Job Injection Rate (job/ms)', fontsize =16)
-    #     plt.ylabel('Average Job Execution Time ($\mu$s)', fontsize=16)
-    #     plt.tick_params(labelsize=12)
-    #     #plt.xticks([0,0.005,0.01,0.015,0.02], [0,5,10,15,20])
-    #     #plt.xticks([0.002,0.004,0.006,0.008,0.01,0.012], [2,4,6,8,10,12])
-    #     plt.grid(True)
-    #
-    #     plt.figure(3)
-    #     plt.plot(lamd_values_list, ave_job_execution_time, marker='s', color=c)
-    #     plt.xlabel('lamd_values_list')
-    #     plt.ylabel('Average Job Execution Time ($\mu$s)')
-    #     plt.grid(True)
-    #
-    #     plt.figure(4)
-    #     plt.plot(ave_job_injection_rate,ave_job_completion_rate , marker='x', color=c)
-    #     plt.xlabel('ave_job_injection_rate')
-    #     plt.ylabel('ave_job_completion_rate')
-    #     plt.grid(True)
-    #     plt.show()
-    # =============================================================================
-
-        fieldnames = ['injection_rate', 'execution']
-        rows = zip(ave_job_injection_rate,ave_job_execution_time)
-        with open('output.csv', 'w') as f:
-            writer = csv.DictWriter(f, lineterminator='\n', fieldnames = fieldnames)
-            writer.writeheader()
-            writer = csv.writer(f, lineterminator='\n', )
-            for row in rows:
-                writer.writerow(row)
-
 if __name__ == '__main__':
-    run_simulator()
+    run_simulator(common.config_scale_values)

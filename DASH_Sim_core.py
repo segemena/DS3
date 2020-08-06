@@ -1,30 +1,30 @@
-'''
-Description: This file contains the simulation core that handles the simulation events.
+'''!
+@brief This file contains the simulation core that handles the simulation events.
 '''
 import sys
-import os
-import csv
+import numpy as np
 
 import common                                                                   # The common parameters used in DASH-Sim are defined in common_parameters.py
 import DTPM
-import DASH_Sim_utils
 import DTPM_policies
+
 # Define the core of the simulation engine
 # This function calls the scheduler, starts/interrupts the tasks,
 # and manages collection of all the statistics
 
 class SimulationManager:
-    '''
+    '''!
     Define the SimulationManager class to handle the simulation events.
     '''
     def __init__(self, env, sim_done, job_gen, scheduler, PE_list, jobs, resource_matrix):
-        '''
-        env: Pointer to the current simulation environment
-        scheduler: Pointer to the DASH_scheduler
-        PE_list: The PEs available in the current SoC
-        jobs: The list of all jobs given to DASH-Sim
-        resource_matrix: The data structure that defines power/performance
-            characteristics of the PEs for each supported task
+        '''!
+        @param env: Pointer to the current simulation environment
+        @param sim_done: Simpy event object to indicate whether the simulation must be finished
+        @param job_gen: JobGenerator object
+        @param scheduler: Pointer to the DASH_scheduler
+        @param PE_list: The PEs available in the current SoC
+        @param jobs: The list of all jobs given to DASH-Sim
+        @param resource_matrix: The data structure that defines power/performance characteristics of the PEs for each supported task
         '''
         self.env = env
         self.sim_done = sim_done
@@ -37,11 +37,15 @@ class SimulationManager:
         self.action = env.process(self.run())  # starts the run() method as a SimPy process
 
 
-    # As the simulation proceeds, tasks are being processed.
-    # We need to update the ready tasks queue after completion of each task
+
     def update_ready_queue(self,completed_task):
-        '''
+        '''!
         This function updates the common.TaskQueues.ready after one task is completed.
+
+        As the simulation proceeds, tasks are being processed.
+        We need to update the ready tasks queue after completion of each task.
+
+        @param completed_task: Object for the task that just completed execution
         '''
 
         # completed_task is the task whose processing is just completed
@@ -76,32 +80,28 @@ class SimulationManager:
 
         # Check if the dependency of any outstanding task is cleared
         # We need to move them to the ready queue
-        for i, outstanding_task in enumerate(common.TaskQueues.outstanding.list):                           # Go over each outstanding task
-            for ii, predecessor in enumerate(outstanding_task.predecessors):                                # Go over each predecessor
-                if (completed_task.ID in outstanding_task.predecessors):                                    # if the completed task is one of the predecessors
-                    outstanding_task.predecessors.remove(completed_task.ID)                                 # Clear this predecessor
-                    
-                    if (common.shared_memory):
-                        # Get the communication time to memory for data from a 
-                        # predecessor task to a outstanding task 
-                        comm_vol = self.jobs.list[job_ID].comm_vol[completed_task.base_ID , outstanding_task.base_ID]
-                        comm_band = common.ResourceManager.comm_band[completed_task.PE_ID, self.resource_matrix.list[-1].ID]
-                        to_memory_comm_time = int(comm_vol/comm_band)                                           # Communication time from a PE to memory
-        
-                        if (common.DEBUG_SIM):
-                            print('[D] Time %d: Data from task %d for task %d will be sent to memory in %d us'
-                                  %(self.env.now, completed_task.ID, outstanding_task.ID, to_memory_comm_time))
-        
-                        # Based on this communication time, this outstanding task
-                        # will be added to the ready queue. That is why, keep track of
-                        # all communication times required for a task in the list
-                        # $ready_wait_times
-                        outstanding_task.ready_wait_times.append(to_memory_comm_time + self.env.now)
-                    # end of if (common.shared_memory):
-                    
-                    
-                # end of if (completed_task.ID in outstanding_task.predecessors):
-            # end of for ii, predecessor in enumerate(outstanding_task.predecessors):
+        for i, outstanding_task in enumerate(common.TaskQueues.outstanding.list):                       # Go over each outstanding task
+            if (completed_task.ID in outstanding_task.predecessors):                                    # if the completed task is one of the predecessors
+                outstanding_task.predecessors.remove(completed_task.ID)                                 # Clear this predecessor
+
+                if (common.shared_memory):
+                    # Get the communication time to memory for data from a
+                    # predecessor task to a outstanding task
+                    comm_vol = self.jobs.list[job_ID].comm_vol[completed_task.base_ID , outstanding_task.base_ID]
+                    comm_band = common.ResourceManager.comm_band[completed_task.PE_ID, self.resource_matrix.list[-1].ID]
+                    to_memory_comm_time = int(comm_vol/comm_band)                                           # Communication time from a PE to memory
+
+                    if (common.DEBUG_SIM):
+                        print('[D] Time %d: Data from task %d for task %d will be sent to memory in %d us'
+                              %(self.env.now, completed_task.ID, outstanding_task.ID, to_memory_comm_time))
+
+                    # Based on this communication time, this outstanding task
+                    # will be added to the ready queue. That is why, keep track of
+                    # all communication times required for a task in the list
+                    # $ready_wait_times
+                    outstanding_task.ready_wait_times.append(to_memory_comm_time + self.env.now)
+                # end of if (common.shared_memory):
+            # end of if (completed_task.ID in outstanding_task.predecessors):
 
             no_predecessors = (len(outstanding_task.predecessors) == 0)                            # Check if this was the last dependency
             currently_running = (outstanding_task in                                               # if the task is in the running queue,
@@ -139,10 +139,12 @@ class SimulationManager:
     #end def update_ready_queue(completed_task)
 
     def update_execution_queue(self, ready_list):
-        '''
+        '''!
         This function updates the common.TaskQueues.executable if one task is ready
         for execution but waiting for the communication time, either between
         memory and a PE, or between two PEs (based on the communication mode)
+
+        @param ready_list: List of tasks that are ready to be executed
         '''
         # Initialize $remove_from_ready_queue which will populate tasks
         # to be removed from the outstanding queue
@@ -158,6 +160,7 @@ class SimulationManager:
 
         job_ID = -1
         for ready_task in ready_list:
+            # If other communication modes are used (PE_to_PE or shared_memory)
             for ind, job in enumerate(self.jobs.list):
                 if job.name == ready_task.jobname:
                     job_ID = ind
@@ -174,14 +177,14 @@ class SimulationManager:
                     for predecessor in task.predecessors:
                         if(task.ID==ready_task.ID):
                            ready_task.predecessors = task.predecessors
-                              
+
                         # data required from the predecessor for $ready_task
                         comm_vol = self.jobs.list[job_ID].comm_vol[predecessor, ready_task.base_ID]
 
                         # retrieve the real ID  of the predecessor based on the job ID
                         real_predecessor_ID = predecessor + ready_task.ID - ready_task.base_ID
 
-                        # Initialize following two variables which will be used if 
+                        # Initialize following two variables which will be used if
                         # PE to PE communication is utilized
                         predecessor_PE_ID = -1
                         predecessor_finish_time = -1
@@ -193,14 +196,14 @@ class SimulationManager:
                                     predecessor_PE_ID = completed.PE_ID
                                     predecessor_finish_time = completed.finish_time
                             comm_band = common.ResourceManager.comm_band[predecessor_PE_ID, ready_task.PE_ID]
-                            PE_to_PE_comm_time = int(comm_vol/comm_band)                                 
+                            PE_to_PE_comm_time = int(comm_vol/comm_band)
                             ready_task.PE_to_PE_wait_time.append(PE_to_PE_comm_time + predecessor_finish_time)
 
                             if (common.DEBUG_SIM):
                                 print('[D] Time %d: Data transfer from PE-%s to PE-%s for task %d from task %d is completed at %d us'
-                                      %(self.env.now, predecessor_PE_ID, ready_task.PE_ID, 
+                                      %(self.env.now, predecessor_PE_ID, ready_task.PE_ID,
                                         ready_task.ID, real_predecessor_ID, ready_task.PE_to_PE_wait_time[-1]))
-                        # end of if (common.PE_to_PE): 
+                        # end of if (common.PE_to_PE):
 
                         if (common.shared_memory):
                             # Compute the memory to PE communication time
@@ -211,7 +214,7 @@ class SimulationManager:
                                       %(self.env.now, ready_task.ID, real_predecessor_ID, ready_task.PE_ID, from_memory_comm_time))
                             ready_task.execution_wait_times.append(from_memory_comm_time + self.env.now)
                         # end of if (common.shared_memory)
-                    # end of for predecessor in task.predecessors:   
+                    # end of for predecessor in task.predecessors:
 
                     if (common.INFO_SIM) and (common.PE_to_PE):
                         print('[I] Time %d: Task %d execution ready times due to communication between PEs are'
@@ -239,11 +242,10 @@ class SimulationManager:
         for task in remove_from_ready_queue:
             common.TaskQueues.ready.list.remove(task)
 
-        # Reorder tasks based on their job IDs
         common.TaskQueues.executable.list.sort(key=lambda task: task.jobID, reverse=False)
-            
+        
     def update_completed_queue(self):
-        '''
+        '''!
         This function updates the common.TaskQueues.completed 
         '''  
         ## Be careful about this function when there are diff jobs in the system
@@ -259,12 +261,12 @@ class SimulationManager:
                     del common.TaskQueues.completed.list[i]
             
         
-    # Implement the basic run method that will be called periodically
-    # in each simulation "tick"
+    #
     def run(self):
-        '''
-        This function takes the next ready tasks and run on the specific PE 
-        and update the common.TaskQueues.ready list accordingly.
+        '''!
+        Implement the basic run method that will be called periodically in each simulation "tick".
+
+        This function takes the next ready tasks and run on the specific PE and update the common.TaskQueues.ready list accordingly.
         '''
         DTPM_module = DTPM.DTPMmodule(self.env, self.resource_matrix, self.PEs)
 
@@ -310,40 +312,18 @@ class SimulationManager:
                 # and scheduler will assign the tasks to a PE
                 if self.scheduler.name == 'CPU_only':
                     self.scheduler.CPU_only(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5TX_FPGA':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5RX_FPGA':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5X_FPGA':
-                    self.scheduler.ILP_TWO(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5TX_BAL':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5RX_BAL':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5X_BAL':
-                    self.scheduler.ILP_TWO(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5TX_BIG':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5RX_BIG':
-                    self.scheduler.ILP_ONE(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_5X_BIG':
-                    self.scheduler.ILP_TWO(common.TaskQueues.ready.list)
                 elif self.scheduler.name == 'MET':
                     self.scheduler.MET(common.TaskQueues.ready.list)
                 elif self.scheduler.name == 'EFT':
                     self.scheduler.EFT(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP':
-                    self.scheduler.ILP(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_TX':
-                    self.scheduler.ILP_TX(common.TaskQueues.ready.list)
                 elif self.scheduler.name == 'STF':
                     self.scheduler.STF(common.TaskQueues.ready.list)
                 elif self.scheduler.name == 'ETF':
                     self.scheduler.ETF(common.TaskQueues.ready.list)
                 elif self.scheduler.name == 'ETF_LB':
                     self.scheduler.ETF_LB(common.TaskQueues.ready.list)
-                elif self.scheduler.name == 'ILP_MULTI':
-                    self.scheduler.ILP_FOUR(common.TaskQueues.ready.list)
+                elif self.scheduler.name == 'CP':
+                    self.scheduler.CP(common.TaskQueues.ready.list)
                 else:
                     print('[E] Could not find the requested scheduler')
                     print('[E] Please check "config_file.ini" and enter a proper name')
@@ -360,7 +340,21 @@ class SimulationManager:
             remove_from_executable = []
 
             # Go over each task in the executable queue
-            if len(common.TaskQueues.executable.list) is not 0:
+            if len(common.TaskQueues.executable.list) != 0:
+                
+                # for PE blocking data collection
+                if self.env.now >= common.warmup_period:
+                    for PE in self.PEs:
+                        a_list = []
+                        if not PE.idle:
+                            for k, executable_task in enumerate(common.TaskQueues.executable.list):
+                                if executable_task.PE_ID == PE.ID:
+                                    if executable_task.time_stamp <= self.env.now:
+                                        a_list.append(executable_task)
+                            
+                        if len(a_list) > 0:            
+                            PE.blocking += 1
+                
                 for i, executable_task in enumerate(common.TaskQueues.executable.list):
                     is_time_to_execute = (executable_task.time_stamp <= self.env.now)
                     PE_has_capacity = (len(self.PEs[executable_task.PE_ID].queue) < self.PEs[executable_task.PE_ID].capacity)
@@ -385,9 +379,6 @@ class SimulationManager:
                         self.env.process(self.PEs[executable_task.PE_ID].run(  # Send the current task and a handle for this simulation manager (self)
                             self, executable_task, current_resource, DTPM_module))  # This handle is used by the PE to call the update_ready_queue function
 
-                        # Since the execution started for the executable task
-                        # we should add it to the running queue
-                        common.TaskQueues.running.list.append(executable_task)
                         remove_from_executable.append(executable_task)
                     # end of if is_time_to_execute and PE_has_capacity and dynamic_dependencies_met
                 # end of for i, executable_task in...
@@ -408,6 +399,6 @@ class SimulationManager:
             # The simulation tick is completed. Wait till the next interval
             yield self.env.timeout(common.simulation_clk)
 
-            if self.env.now > common.simulation_length:
+            if self.env.now > common.simulation_length and common.inject_fixed_num_jobs is False:
                 self.sim_done.succeed()
         #end while (True)

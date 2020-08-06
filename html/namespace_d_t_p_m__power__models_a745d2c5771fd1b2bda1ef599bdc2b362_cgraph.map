@@ -1,0 +1,5 @@
+<map id="DTPM_power_models.compute_dynamic_power_dissipation" name="DTPM_power_models.compute_dynamic_power_dissipation">
+<area shape="rect" id="node1" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="5,41,248,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a72eb1a0883aa9da4fab60acadd6b13dd" title="Convert frequency from MHz to Hz." alt="" coords="296,5,501,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a9842c48a1a666626749170428c3ac8eb" title="Convert voltage from mV to V." alt="" coords="296,76,501,123"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DTPM_train_model.main" name="DTPM_train_model.main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,14,201,43"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__train__model.html#a7468f879062e4221b1dfa292f2d4e14e" title="Based on the chosen ML algorithm configured in config_file.ini, train the DTPM policy." alt="" coords="249,5,441,52"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DTPM_power_models.get_execution_time_max_frequency" name="DTPM_power_models.get_execution_time_max_frequency">
+<area shape="rect" id="node1" title="Get the execution time of the current task if it was running at maximum frequency and considering the..." alt="" coords="268,5,519,52"/>
+<area shape="rect" id="node2" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="5,14,220,43"/>
+</map>

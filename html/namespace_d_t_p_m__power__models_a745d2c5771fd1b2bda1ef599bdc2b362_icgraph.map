@@ -1,0 +1,4 @@
+<map id="DTPM_power_models.compute_dynamic_power_dissipation" name="DTPM_power_models.compute_dynamic_power_dissipation">
+<area shape="rect" id="node1" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="268,5,511,52"/>
+<area shape="rect" id="node2" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="5,14,220,43"/>
+</map>

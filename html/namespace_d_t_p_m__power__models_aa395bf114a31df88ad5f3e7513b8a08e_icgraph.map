@@ -1,0 +1,4 @@
+<map id="DTPM_power_models.get_max_power_consumption" name="DTPM_power_models.get_max_power_consumption">
+<area shape="rect" id="node1" title="Get the power consumption of the current PE." alt="" coords="268,5,477,52"/>
+<area shape="rect" id="node2" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="5,14,220,43"/>
+</map>

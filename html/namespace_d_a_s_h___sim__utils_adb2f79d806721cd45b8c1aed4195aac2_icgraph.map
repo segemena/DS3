@@ -1,0 +1,5 @@
+<map id="DASH_Sim_utils.trace_PEs" name="DASH_Sim_utils.trace_PEs">
+<area shape="rect" id="node1" title="Trace method for saving statistics related to the PEs." alt="" coords="591,14,809,43"/>
+<area shape="rect" id="node2" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,14,543,43"/>
+<area shape="rect" id="node3" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,5,235,52"/>
+</map>

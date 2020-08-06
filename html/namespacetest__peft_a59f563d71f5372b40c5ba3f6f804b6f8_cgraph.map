@@ -1,0 +1,6 @@
+<map id="test_peft.test_canonical_graph" name="test_peft.test_canonical_graph">
+<area shape="rect" id="node1" title=" " alt="" coords="5,22,192,69"/>
+<area shape="rect" id="node2" href="$namespacepeft.html#a02b95d663cf1dbb04792a75c23df9376" title="Given an input file consisting of a comma separated list of numeric values with a single header row a..." alt="" coords="444,5,663,35"/>
+<area shape="rect" id="node3" href="$namespacepeft.html#ab988db4a99a628fb239608585b8c47e9" title="Given an input file consisting of a connectivity matrix, reads and parses it into a networkx Directio..." alt="" coords="240,31,396,60"/>
+<area shape="rect" id="node4" href="$namespacepeft.html#a31a67dceaf8bedd93da39986f89ebd9a" title="Given an application DAG and a set of matrices specifying PE bandwidth and (task, pe) execution times..." alt="" coords="243,84,393,113"/>
+</map>

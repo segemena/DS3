@@ -1,0 +1,4 @@
+<map id="DTPM_utils.merge_hardware_counters_multiple_applications" name="DTPM_utils.merge_hardware_counters_multiple_applications">
+<area shape="rect" id="node1" title="Merge the hardware counters from multiple applications to create the snippet profile." alt="" coords="5,5,251,52"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a09a93a8e21f05873ab9bf11a3fa78e9a" title="Based on the Odroid&#45;XU3 hardware counter profiles, filter and merge the hardware counters for individ..." alt="" coords="299,5,525,52"/>
+</map>

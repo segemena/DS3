@@ -1,0 +1,8 @@
+<map id="DTPM_power_models.compute_Cdyn_and_alpha" name="DTPM_power_models.compute_Cdyn_and_alpha">
+<area shape="rect" id="node1" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="5,76,248,123"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a72eb1a0883aa9da4fab60acadd6b13dd" title="Convert frequency from MHz to Hz." alt="" coords="296,5,501,52"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="296,76,501,123"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#a9842c48a1a666626749170428c3ac8eb" title="Convert voltage from mV to V." alt="" coords="296,147,501,193"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="549,41,755,88"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="549,112,755,159"/>
+</map>

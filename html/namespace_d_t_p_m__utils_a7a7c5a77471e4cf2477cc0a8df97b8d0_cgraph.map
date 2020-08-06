@@ -1,0 +1,16 @@
+<map id="DTPM_utils.update_temperature_dataset" name="DTPM_utils.update_temperature_dataset">
+<area shape="rect" id="node1" title="Update datasets with current temperature profiles." alt="" coords="5,244,253,291"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__utils.html#a4e13030d9ca8f69b59ccaa9347f29a5e" title="Predict the power for all clusters based on the inputs." alt="" coords="326,173,507,220"/>
+<area shape="rect" id="node13" href="$namespace_d_t_p_m__power__models.html#abddd7e05302d27a6bee489f31db0c9a9" title="Predict the temperature N_steps ahead." alt="" coords="301,244,532,291"/>
+<area shape="rect" id="node14" href="$namespace_d_t_p_m__utils.html#a0037071bb37f4eb231443e6ceaba9012" title="Perform the pure&#45;Python equivalent of in&#45;place sed substitution: e.g., ‘sed &#45;i &#45;e &#39;s/’${pattern}&#39;/&#39;${..." alt="" coords="321,315,513,345"/>
+<area shape="rect" id="node3" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="580,103,823,149"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#abd99e7ecc4a5cea6d0c1184e512b7424" title="Get the voltage of the OPP that satisfies the defined constant frequency." alt="" coords="881,41,1087,88"/>
+<area shape="rect" id="node9" href="$namespace_d_t_p_m__power__models.html#a745d2c5771fd1b2bda1ef599bdc2b362" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="580,173,823,220"/>
+<area shape="rect" id="node10" href="$namespace_d_t_p_m__power__models.html#af8b8111dffef911ea6338fe31fb371c8" title="Compute the static power dissipation of the PE." alt="" coords="580,244,823,291"/>
+<area shape="rect" id="node11" href="$namespace_d_t_p_m__power__models.html#aa395bf114a31df88ad5f3e7513b8a08e" title="Get the power consumption of the current PE." alt="" coords="597,315,806,361"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#a72eb1a0883aa9da4fab60acadd6b13dd" title="Convert frequency from MHz to Hz." alt="" coords="881,112,1087,159"/>
+<area shape="rect" id="node8" href="$namespace_d_t_p_m__power__models.html#a9842c48a1a666626749170428c3ac8eb" title="Convert voltage from mV to V." alt="" coords="881,183,1087,229"/>
+<area shape="rect" id="node6" href="$namespace_d_t_p_m__power__models.html#a48124965f0c4bbd3cf98990f4ad9808c" title="Get the maximum frequency of a cluster." alt="" coords="1145,5,1351,52"/>
+<area shape="rect" id="node7" href="$namespace_d_t_p_m__power__models.html#af43bd1deddf711c2f85f1256bfd94a55" title="Get the minimum frequency of a cluster." alt="" coords="1145,76,1351,123"/>
+<area shape="rect" id="node12" href="$namespace_d_a_s_h___sim__utils.html#a99aab56376ce5ff66032d442e5a09b46" title="Get the number of tasks that are being executed." alt="" coords="871,315,1097,361"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="DASH_Sim_utils.trace_IL_predictions" name="DASH_Sim_utils.trace_IL_predictions">
+<area shape="rect" id="node1" title="Trace method for saving the DTPM IL predictions." alt="" coords="832,41,1011,88"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__policies.html#a7bf865664cbbc41ba53932a720b378f6" title="DyPO policy (https://dl.acm.org/doi/10.1145/3126530)" alt="" coords="599,5,775,52"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__policies.html#af2d18aa3967a5c0e388e32c411c81fc6" title="HiLITE IL policy (https://ieeexplore.ieee.org/document/9085952)" alt="" coords="591,76,784,123"/>
+<area shape="rect" id="node3" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#a38fbce7c41656d9daaaa8e8842b8303c" title="Responsible for updating the PE utilization and temperature, and invoking tracing,..." alt="" coords="283,50,543,79"/>
+<area shape="rect" id="node4" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,41,235,88"/>
+</map>

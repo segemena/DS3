@@ -1,0 +1,6 @@
+<map id="dag_merge.merge_dags" name="dag_merge.merge_dags">
+<area shape="rect" id="node1" title=" " alt="" coords="297,59,493,88"/>
+<area shape="rect" id="node2" href="$classscheduler_1_1_scheduler.html#a1b52908d116ed2514654f4ffd3e442ce" title="Schedule with the HEFT_RT heuristic." alt="" coords="9,5,246,35"/>
+<area shape="rect" id="node3" href="$classscheduler_1_1_scheduler.html#ae2063bf3f6ba854208e748d28931dbe5" title="Schedule with the PEFT_RT heuristic." alt="" coords="9,59,246,88"/>
+<area shape="rect" id="node4" href="$classjob__generator_1_1_job_generator.html#a05c89b53502f2fbaecc8b4be2cd8b330" title=" " alt="" coords="5,112,249,141"/>
+</map>

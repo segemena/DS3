@@ -1,0 +1,5 @@
+<map id="DTPM_power_models.compute_DVFS_performance_slowdown" name="DTPM_power_models.compute_DVFS_performance_slowdown">
+<area shape="rect" id="node1" title="Compute the slowdown from running a given task with lower frequency." alt="" coords="280,23,529,70"/>
+<area shape="rect" id="node2" href="$classscheduler_1_1_scheduler.html#a34f633449b5d2de2f22dfa46a863844e" title="This scheduler compares the execution times of the current task for available resources and also cons..." alt="" coords="5,5,232,35"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="11,59,226,88"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="DASH_Sim_v0.run_simulator" name="DASH_Sim_v0.run_simulator">
+<area shape="rect" id="node1" title="Parse the job and SoC configurations and execute the simulation environment with the parameters from ..." alt="" coords="5,179,232,209"/>
+<area shape="rect" id="node2" href="$namespace_d_a_s_h___sim__utils.html#a46338263611a823e53ba1f06a234be9d" title="Remove old trace files." alt="" coords="303,5,484,52"/>
+<area shape="rect" id="node3" href="$namespace_d_a_s_h___sim__utils.html#a6b74f54f3dc69b9355eb22e329dfa13e" title="Initialize config variables." alt="" coords="299,76,488,123"/>
+<area shape="rect" id="node4" href="$namespacejob__parser.html#a60f3a1b846c9b4a4c78e371c22c8eb24" title="Parse the specified job file." alt="" coords="308,147,479,177"/>
+<area shape="rect" id="node5" href="$namespace_d_a_s_h___so_c__parser.html#a57cccf10cbc361fd50b050c1dc8dc820" title="Read and parse the SoC configuration." alt="" coords="280,201,507,248"/>
+<area shape="rect" id="node6" href="$namespacecommon.html#ae1a27e335a48783865ddc2be981c0f0a" title=" " alt="" coords="317,273,470,302"/>
+<area shape="rect" id="node7" href="$namespace_d_a_s_h___sim__utils.html#a85db1e40befdf4d527931923296ad388" title="Trace method for saving statistics related to the system, i.e., the whole simulation." alt="" coords="304,327,483,373"/>
+</map>

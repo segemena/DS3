@@ -1,0 +1,8 @@
+<map id="DTPM_power_models.get_voltage_in_V" name="DTPM_power_models.get_voltage_in_V">
+<area shape="rect" id="node1" title="Convert voltage from mV to V." alt="" coords="573,76,779,123"/>
+<area shape="rect" id="node2" href="$namespace_d_t_p_m__power__models.html#a33aef80593b650e23f5b1f79dd878e4a" title="Based on the maximum frequency, voltage, and measured power dissipation, compute the capacitance C ti..." alt="" coords="283,5,525,52"/>
+<area shape="rect" id="node4" href="$namespace_d_t_p_m__power__models.html#a745d2c5771fd1b2bda1ef599bdc2b362" title="Compute the dynamic power dissipation for the current task based on the current state of the PE." alt="" coords="283,76,525,123"/>
+<area shape="rect" id="node5" href="$namespace_d_t_p_m__power__models.html#af8b8111dffef911ea6338fe31fb371c8" title="Compute the static power dissipation of the PE." alt="" coords="283,147,525,193"/>
+<area shape="rect" id="node3" href="$classprocessing__element_1_1_p_e.html#a44a465eb3d56f655125a9d90f42e16d9" title="Run this PE to execute a given task." alt="" coords="13,85,227,114"/>
+<area shape="rect" id="node6" href="$class_d_t_p_m_1_1_d_t_p_mmodule.html#aa81ced9a4c7d45399464937d39f690d2" title="Check all PEs and, for those that are idle, adjust the frequency and power accordingly." alt="" coords="5,147,235,193"/>
+</map>

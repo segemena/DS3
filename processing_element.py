@@ -1,35 +1,26 @@
-'''
-Description: This file contains the process elements and their attributes.
+'''!
+@brief This file contains the process elements and their attributes.
 '''
 import simpy
-import os
-import pickle
-import math
-import random
-from statistics import mean
+import copy
 
 import common                                                                           # The common parameters used in DASH-Sim are defined in common_parameters.py
 import DTPM_power_models
 import DASH_Sim_utils
 import DTPM_policies
 
-# Define the Processing Element (PE) resource
-import job_generator
-
-
 class PE:
-    '''
-    A processing element (PE) is the basic resource that defines
-    the simpy processes.
-
-    A PE has a *name*, *utilization (float)* and a process (resource)
+    '''!
+    A processing element (PE) is the basic resource that defines the simpy processes.
     '''
     def __init__(self, env, type, name, ID, cluster_ID, capacity):
-        '''
-        env: Pointer to the current simulation environment
-        name: Name of the current processing element
-        ID: ID of the current processing element
-        capacity: Number tasks that a resource can run simultaneously
+        '''!
+        @param env: Pointer to the current simulation environment
+        @param type: Type of the PE (e.g., BIG, LTL, ACC, MEM, etc.)
+        @param name: Name of the current processing element
+        @param ID: ID of the current processing element
+        @param cluster_ID: ID of the cluster to which this PE belongs
+        @param capacity: Number tasks that a resource can run simultaneously
         '''
         self.env = env
         self.type = type
@@ -53,6 +44,8 @@ class PE:
         self.available_time = 0                                                 # Estimated available time of the PE
         self.available_time_list = [0]*self.capacity                            # Estimated available time for each core os the PE
         self.idle = True                                                        # The variable indicates whether the PE is active or not
+        self.blocking = 0                                                       # Duration that a PE is busy when some other tasks are ready to execute 
+        self.active = 0                                                         # Total active time for a PE while executing a workload
         
         self.info = []                                                          # List to record all the events happened on a PE
         self.process = simpy.Resource(env, capacity=self.capacity)
@@ -62,9 +55,13 @@ class PE:
 
     # Start the "run" process for this PE
     def run(self, sim_manager, task, resource, DVFS_module):
-        '''
+        '''!
         Run this PE to execute a given task.
-        The execution time is retrieved from resource_matrix and task name
+        The execution time is retrieved from resource_matrix and task name.
+        @param sim_manager: Simulation environment object (DASH_Sim_core)
+        @param task: Task to be executed
+        @param resource: Resource object for this PE
+        @param DVFS_module: DVFS module object
         '''
         try:
             with self.process.request() as req:                                 # Requesting the resource for the task
@@ -75,13 +72,13 @@ class PE:
                     if common.ClusterManager.cluster_list[self.cluster_ID].DVFS != 'none' or len(common.ClusterManager.cluster_list[self.cluster_ID].OPP) != 0:
                         DTPM_policies.initialize_frequency(common.ClusterManager.cluster_list[self.cluster_ID])
 
-                        DASH_Sim_utils.trace_frequency(self.env.now, common.ClusterManager.cluster_list[self.cluster_ID])
+                        DASH_Sim_utils.trace_frequency(self.env.now)
 
                 self.idle = False                                               # Since the PE starts execution of a task, it is not idle anymore
+                common.TaskQueues.running.list.append(task)                     # Since the execution started for the task we should add it to the running queue 
                 task.start_time = self.env.now                                  # When a resource starts executing the task, record it as the start time
 
-                # if this is the leading task of this job,
-                # increment the injection counter
+                # if this is the leading task of this job, increment the injection counter
                 if ((task.head == True) and
                     (self.env.now >= common.warmup_period)):
                     common.results.injected_jobs += 1
@@ -121,7 +118,7 @@ class PE:
                         task_complete = True
 
                     # Compute the static energy
-                    current_leakage = DTPM_power_models.compute_static_power_dissipation(self)
+                    current_leakage = DTPM_power_models.compute_static_power_dissipation(self.cluster_ID)
                     static_energy += current_leakage * simulation_step * 1e-6
 
                     max_power_consumption, freq_threshold = DTPM_power_models.get_max_power_consumption(common.ClusterManager.cluster_list[self.cluster_ID], sim_manager.PEs)  # of this task on this resource running at max frequency
@@ -174,6 +171,12 @@ class PE:
                 
                 task_time = task.finish_time - task.start_time
                 self.idle = True
+                
+                if task.finish_time > common.warmup_period:
+                    if task.start_time <= common.warmup_period:
+                        self.active += (task.finish_time - common.warmup_period)
+                    else:
+                        self.active += task_time
 
                 # If there are no OPPs in the model, use the measured power consumption from the model
                 if len(common.ClusterManager.cluster_list[self.cluster_ID].OPP) == 0:
@@ -230,29 +233,33 @@ class PE:
                     DVFS_module.evaluate_PE(resource, self, self.env.now)
 
                 if (task.tail) and (self.env.now >= common.warmup_period) and (common.results.completed_jobs % common.snippet_size == 0):
+
                     # Reset energy of the snippet
                     for PE in sim_manager.PEs:
                         PE.snippet_energy = 0
 
                     common.snippet_start_time = self.env.now
+                    common.snippet_initial_temp = copy.deepcopy(common.current_temperature_vector)
 
                     common.snippet_throttle = -1
+                    for cluster in common.ClusterManager.cluster_list:
+                        cluster.snippet_power_list = []
                     common.snippet_temp_list = []
                     common.snippet_ID_exec += 1
                     if common.job_list != []:
                         if common.snippet_ID_exec < common.max_num_jobs / common.snippet_size:
                             common.current_job_list = common.job_list[common.snippet_ID_exec]
 
-                    # Ends the simulation if all jobs are executed (if sim_early_stop is enabled)
+                    # Ends the simulation if all jobs are executed (if inject_fixed_num_jobs is enabled)
                     if common.results.completed_jobs == common.max_num_jobs:
+                        #common.simulation_length = self.env.now
                         sim_manager.sim_done.succeed()
-
+                        
                 # end of with self.process.request() as req:
             
         except simpy.Interrupt:
             print('Expect an interrupt at %s' % (self.env.now))
     # end of def run(self, sim_manager, task, resource):
-
 
 
 # end class PE(object):
