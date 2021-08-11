@@ -1,5 +1,5 @@
 *************************************************************************
-   	© Copyright 2020 ASU All rights reserved.
+   	© Copyright 2021 ASU All rights reserved.
       This file contains confidential and proprietary
  	    information of DASH-SoC Project.
 *************************************************************************
@@ -77,3 +77,9 @@ Please be sure that all the files listed below are in your file directory
 │   └── config_Jobs/job_*.txt    : These files are the configuration files of the Jobs.
 └── ...
 ```
+
+# 4. Dynamic Adaptive Scheduling Framework (DAS)
+Dynamic Adaptive Scheduling (DAS) Framework aims to choose between a fast, simple, and low-overhead scheduler and a slow, complex, high-quality scheduler at run-time using the decisions given by the DAS preselection classifier. DAS framework is evaluated using five real-world applications, namely, range detection, WiFi transmitter, WiFi receiver, pulse doppler applications, and a proprietary industrial application (App-1). DAS preselection classifier is trained using 40 different workloads simulated in DS3. These workloads are mixes of the five real-world applications. You can see the distribution of application instances in the following figure. More details about the DAS framework is given in the paper titled "DAS: Dynamic Adaptive Scheduling for Energy-Efficient Heterogeneous SoCs".
+![DASH_workload_distribution](./DAS_workload_distribution.png)
+**Figure**: 
+The distribution of number and type of application instances in the 40 workloads used for evaluation of the DAS framework. Each workload consists of 100 jobs and the stacked bar for each workload denotes the number of instances of each type of application. For instance, workload-6 (WKL-6) uses 50 instances of WiFi-Transmitter and 50 instances of App-1, and workload-31 (WKL-31) uses 20 instances of each type.
