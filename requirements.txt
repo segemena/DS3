@@ -8,6 +8,6 @@ scipy==1.4.1
 docplex==2.13.184
 matplotlib==3.1.1
 pydotplus==2.0.2
-ipython==7.15.0
+ipython==7.16.3
 pytest==5.4.3
 scikit_learn==0.23.1
